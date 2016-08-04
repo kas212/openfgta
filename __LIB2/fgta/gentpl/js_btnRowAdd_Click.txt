@@ -1,0 +1,9 @@
+
+            case "{__DETILNAME__}" :
+                if (ui.endEditing(ui.{__DGVDETIL__})){
+                    // muncul dialog
+
+                    //tambahkan ke grid
+                    ui.appendRow(ui.{__DGVDETIL__}, {});
+                }
+                break;

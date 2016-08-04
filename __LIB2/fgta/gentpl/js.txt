@@ -1,0 +1,90 @@
+var {__CLASSNAME__} = function () {
+	$.extend(this, new FGTA_uiBase());
+	var ui = this;
+
+
+	this._LastPageNumber = 0;
+	this._LastPageSize = 0;
+	this.Init = function () {
+		ui.NS = '{__NS__}';
+		ui.CL = '{__CL__}';
+		ui.SetToolboxButtonState(0);
+		ui.tabMain.tabs('enableTab', 'List');
+		ui.tabMain.tabs('disableTab', 'Data');
+		ui.formMain.form({
+			onChange: function(target) {
+				ui.Editor.setDataChanges();
+			}
+		});
+		_btnLoad_Click(ui,0,0);
+
+
+	};
+}
+
+
+
+
+{__DGVDETIL_ROWDBLCLICK__}
+
+
+function _btnNew_Click(ui) {
+	ui.Editor.new();
+}
+
+function _btnEdit_Click(ui) {
+	ui.btnEdit_Toggle();
+}
+
+function _btnSave_Click(ui) {
+	ui.Editor.endEdit();
+	ui.DataSave({
+		H: {
+			{__HEADER_SAVE__}
+			__STATE: ui.Editor.getFormDataState(),
+		},
+		D: {
+			{__DGVDETIL_SAVE__}
+		}
+	});
+}
+
+function _btnDelete_Click(ui) {
+
+	var param = {
+		id: ui.Editor.{__IDFIELD__}.textbox('getValue')
+	}
+	ui.DataDelete(param);
+}
+
+function _btnLoad_Click(ui, pageNumber, pageSize) {
+	ui.DataLoad(pageNumber, pageSize);
+}
+
+function _btnRowadd_Click(ui) {
+	var opts = ui.tabMainDetil.tabs('getSelected').panel('options');
+	switch (opts.title) {
+        {__BTNROWADD_CLICK__}
+	}
+}
+
+function _btnRowremove_Click(ui) {
+	var opts = ui.tabMainDetil.tabs('getSelected').panel('options');
+	switch (opts.title) {
+        {__BTNROWREMOVE_CLICK__}
+	}
+}
+
+
+function _open_data(ui, id) {
+	ui.DataOpen({id, id},
+		function(data) {
+
+			{__OPENDATA_HEADER__}
+
+			{__OPENDATA_DETIL__}
+
+			ui.btnEdit.linkbutton('enable');
+		}
+	);
+}

@@ -1,0 +1,215 @@
+<?php
+
+	class {__PHPCLASSNAME__} extends FGTA_Content
+	{
+
+		public $FIELD_ID = "{__FIELD_ID__}";
+		public $FIELD_ID_MAPPING = "{__FIELD_ID_MAPPING__}";
+		public $FIELD_ID_ISAUTO = {__FIELD_ID_ISAUTO__};
+
+
+		public function LoadPage() {
+			global $_GET;
+
+			$this->Scripts->load("{__PHPCLASSNAME__}.js");
+
+			$this->dgvList = new FGTA_Control_Datagrid([
+				'name' => 'dgvList',
+				'columnid'=> $this->FIELD_ID_MAPPING,
+				'options'=> '
+					pagination:true
+				',
+				'columns' => [
+					{__DGVLIST_COLUMNS__}
+				]
+			]);
+
+
+			$this->Search = array(
+				{__DGVLIST_SEARCH__}
+			);
+
+
+			$this->Editor = array(
+				{__HEADERFORMOBJECT__}
+				{__DGVDETIL_CONSTRUCT__}
+			);
+
+		}
+
+		{__PRELOAD__}
+
+
+		public function ListData($pageNumber, $pageSize, $param) {
+
+			$CONDS = FGTA_SqlUtil::GetWhereCondition(array(
+				{__LOAD_SEARCH__}
+			), $param);
+
+			$WHERE_STMT     = $CONDS["SQL"];
+			$SQL_PARAMVALUE = $CONDS["VALUE"];
+
+			$sql = "SELECT COUNT(*) AS N FROM {__HEADER_TABLE__} $WHERE_STMT " ;
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($SQL_PARAMVALUE);
+			$row  = $stmt->fetch(PDO::FETCH_ASSOC);
+			$total = (float) $row['N'];
+
+			$offset = ($pageSize * ($pageNumber-1));
+
+			$sql = "SELECT FIRST $pageSize SKIP $offset
+					{__LOAD_SQL_FIELD__}
+			        FROM {__HEADER_TABLE__}
+					$WHERE_STMT
+					";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($SQL_PARAMVALUE);
+			$rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$records = array();
+			foreach ($rows as $row)
+			{
+				$records[] = array(
+						{__LOAD_SQL_FIELDMAPPING__}
+				);
+			}
+
+			$obj = new stdClass;
+			$obj->total = $total;
+			$obj->records = $records;
+
+			return $obj;
+		}
+
+
+		public function OpenData($id) {
+			$obj = $this->OpenData_Header($id);
+			$obj->DETIL = array(
+				{__OPEN_DATADETIL__}
+			);
+
+			return $obj;
+		}
+
+		public function OpenData_Header($id) {
+			$sql = "SELECT
+					{__OPEN_DATAHEADERSQL__}
+					,\"_CREATEBY\", \"_CREATEDATE\", \"_MODIFYBY\", \"_MODIFYDATE\", \"_ROWID\"
+			        FROM {__HEADER_TABLE__} WHERE {__FIELD_ID_MAPPING__} = :{__FIELD_ID_MAPPING__} ";
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(
+							':{__FIELD_ID_MAPPING__}' => $id
+					));
+
+			$rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			if (count($rows)==0)
+				return null;
+
+		 	$row = $rows[0];
+
+
+			$obj = new stdClass;
+			{__OPEN_DATAHEADERSQLMAPPING__}
+
+			$obj->_recordcreateby = $row["_CREATEBY"];
+			$obj->_recordcreatedate = $row["_CREATEDATE"];
+			$obj->_recordmodifyby = $row["_MODIFYBY"];
+			$obj->_recordmodifydate = $row["_MODIFYDATE"];
+			$obj->_recordrowid = $row["_ROWID"];
+
+			return $obj;
+		}
+
+
+		{__OPEN_DATADETIL_FN__}
+
+
+		public function NewId($H) {
+			return "testid";
+		}
+
+		public function Save($H, $D) {
+			$db = $this->db;
+			$db->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
+			$db->beginTransaction();
+
+			try {
+				$id = $this->Save_Header($H);
+				{__SAVE_DETIL__}
+
+				$db->commit();
+				$db->setAttribute(PDO::ATTR_AUTOCOMMIT,1);
+
+				$obj = $this->OpenData_Header($id);
+				if ($obj==null)
+					throw new Exception('Data not saved correctly.');
+
+				return $obj;
+			} catch (Exception $e) {
+				$db->rollBack();
+				throw new Exception('Error in Saving Data.\r\n' . $e->getMessage());
+			}
+		}
+
+		public function Save_Header($H) {
+			$TABLE = "{__HEADER_TABLE__}";
+
+			$obj = new stdClass;
+			{__SAVE_HEADER__}
+
+
+			$__STATE = $H['__STATE'];
+			if ($__STATE=='insert') {
+				$id = ($this->FIELD_ID_ISAUTO) ? $this->NewId($H) : $H[$this->FIELD_ID_MAPPING];
+				$obj->{$this->FIELD_ID_MAPPING} = $id;
+				$obj->_CREATEBY = $_SESSION['username'];
+				$obj->_CREATEDATE = date("Y-m-d H:i:s");
+				$obj->_ROWID = FGTA_SqlUtil::CreateGUID();
+				$cmd = FGTA_SqlUtil::CreateSQLInsert($TABLE, $obj);
+			} else if ($__STATE=='update' || $__STATE=='nochange') {
+				$id = $H[$this->FIELD_ID_MAPPING];
+				$key = new stdClass;
+				$key->{$this->FIELD_ID_MAPPING} = $id;
+				$obj = ($__STATE=='update') ? $obj : new stdClass;
+				$obj->_MODIFYBY = $_SESSION['username'];
+				$obj->_MODIFYDATE = date("Y-m-d H:i:s");
+				$cmd = FGTA_SqlUtil::CreateSQLUpdate($TABLE, $obj, $key);
+			}
+
+			FGTA_SqlUtil::PDO_Update($this->db, $cmd);
+
+
+			return $id;
+		}
+
+		{__SAVE_DETIL_FN__}
+
+
+		public function Delete($id) {
+			$db = $this->db;
+			$db->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
+			$db->beginTransaction();
+
+			try {
+
+				$TBL = [{__DELETE_TABLE_LIST__}];
+				foreach ($TBL as $TABLE) {
+					$key = new stdClass;
+					$key->{$this->FIELD_ID_MAPPING} = $id;
+					$cmd = FGTA_SqlUtil::CreateSQLDelete($TABLE, $key);
+					FGTA_SqlUtil::PDO_Update($this->db, $cmd);
+				}
+
+				$db->commit();
+				$db->setAttribute(PDO::ATTR_AUTOCOMMIT,1);
+
+				return true;
+			} catch (Exception $e) {
+				$db->rollBack();
+				throw new Exception('Error in Deleting Data.\r\n' . $e->getMessage());
+			}
+		}
+
+
+	}

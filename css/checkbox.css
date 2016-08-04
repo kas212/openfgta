@@ -1,0 +1,93 @@
+input[type=checkbox].css-checkbox-readandwrite {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+						input[type=checkbox].css-checkbox-readandwrite + label.css-label-readandwrite {
+							padding-left:18px;
+							height:13px;
+							display:inline-block;
+							line-height:13px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							font-size:13px;
+							vertical-align:middle;
+							cursor:pointer;
+
+						}
+
+						input[type=checkbox].css-checkbox-readandwrite:checked + label.css-label-readandwrite {
+							background-position: 0 -13px;
+						}
+label.css-label-readandwrite {
+				background-image:url('../icon/fgta_checkbox_readandwrite.png');
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+
+input[type=checkbox].css-checkbox-readonly {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+input[type=checkbox].css-checkbox-readonly + label.css-label-readonly {
+							padding-left:18px;
+							height:13px;
+							display:inline-block;
+							line-height:13px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							font-size:13px;
+							vertical-align:middle;
+							cursor:pointer;
+}
+
+input[type=checkbox].css-checkbox-readonly:checked + label.css-label-readonly {
+							background-position: 0 -13px;
+}
+
+label.css-label-readonly {
+				background-image:url('../icon/fgta_checkbox_readonly.png');
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+
+
+input[type=checkbox].css-checkbox-disabled {
+										position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+									}
+
+			input[type=checkbox].css-checkbox-disabled + label.css-label-disabled {
+										padding-left:18px;
+										height:13px;
+										display:inline-block;
+										line-height:13px;
+										background-repeat:no-repeat;
+										background-position: 0 0;
+										font-size:13px;
+										vertical-align:middle;
+										cursor:pointer;
+			}
+
+			input[type=checkbox].css-checkbox-disabled:checked + label.css-label-disabled {
+										background-position: 0 -13px;
+			}
+
+			label.css-label-disabled {
+							background-image:url('../icon/fgta_checkbox_disabled.png');
+							-webkit-touch-callout: none;
+							-webkit-user-select: none;
+							-khtml-user-select: none;
+							-moz-user-select: none;
+							-ms-user-select: none;
+							user-select: none;
+							color: #aaa;
+						}

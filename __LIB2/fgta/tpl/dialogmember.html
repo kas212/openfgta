@@ -1,0 +1,112 @@
+
+
+<div id="{__DIALOG_ID__}" class="easyui-dialog" title="{__DIALOG_TITLE__}"
+    style="width:400px;height:500px;padding:10px;"
+    data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" >
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'north'" border="false" style="height:40px;">
+        {__DIALOG_SEARCH__}
+        </div>
+        <div data-options="region:'center'" border="false">
+            <table id="{__DIALOG_SEARCH_DGV__}" class="easyui-datagrid"
+                       data-options="fit:true,singleSelect:true,
+                       onDblClickRow: function(index,row) { {__FN_DIALOG_SELECT__}(ui,index,row) },
+                ">
+                <thead><tr>
+                        {__DGV_COLUMNS__}
+                </tr></thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function {__FN_DIALOG_INIT__}(ui) {
+        $('#{__DIALOG_SEARCH_TEXTBOX__}').textbox('textbox').bind('keydown', function(e) {
+            if (e.keyCode==13) {
+                {__FN_DIALOG_DOSEARCH__}(ui);
+            }
+        });
+
+        $('#{__DIALOG_SEARCH_BUTTON__}').bind('click', function(){
+            {__FN_DIALOG_DOSEARCH__}(ui);
+        });
+    }
+
+
+    function {__FN_DIALOG_DOSEARCH__}(ui) {
+        $('#{__DIALOG_SEARCH_DGV__}').datagrid('loading');
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: {__WEBSERVICE_URL__},
+            data: {
+                pageNumber: 1,
+                pageSize: 30,
+                param: [
+                    {__WEBSERVICE_DEFAULT_PARAM__}
+                    {__WEBSERVICE_PARAM__}
+                ]
+            },
+            success: function (result, status, xhr) {
+                try {
+                    var data = ui.ProcessAjaxJsonResult(result, status, xhr);
+                    if (data == null) throw "invalid data";
+
+                    var index;
+                    var exists = [];
+                    var rows = ui.{__RETURN_DGV_NAME__}.datagrid('getData').rows;
+                    for (index = 0; index < rows.length; index++) {
+                        exists.push(rows[index].{__IDMAPPING__});
+                    }
+
+                    for(index=data.records.length-1; index>=0; index--){
+                        if (jQuery.inArray(data.records[index].{__IDMAPPING__}, exists)>=0) data.records.splice(index, 1);
+                    }
+
+                    $('#{__DIALOG_SEARCH_DGV__}').datagrid('loadData', data.records);
+                    $('#{__DIALOG_SEARCH_DGV__}').datagrid('loaded');
+
+                    if (data.records.length>0) {
+                        $('#{__DIALOG_SEARCH_DGV__}').datagrid('selectRow', 0);
+                    }
+
+                }
+                catch (err) {
+                    $('#{__DIALOG_SEARCH_DGV__}').datagrid('loaded');
+                    $.messager.alert("Load Data Error", err, "error").window({ shadow: false });
+                }
+            },
+            error: function (xhr, status, error) {
+                $('#{__DIALOG_SEARCH_DGV__}').datagrid('loaded');
+                ui.ProcessErrorText("Webservice Load Data Error", xhr, status, error);
+            },
+        });
+    }
+
+
+
+    function {__FN_DIALOG_SELECT__}(ui,index,row) {
+    	var newrow =  {
+    		{__ROW_RETURN__}
+    	};
+
+        var execute_add = false;
+        var fn_onSelect = ui.{__RETURN_DGV_NAME__}.ev_onSelect;
+        if (fn_onSelect != null) {
+            execute_add = fn_onSelect(ui.{__RETURN_DGV_NAME__}, newrow);
+        } else {
+            execute_add = true;
+        }
+
+        if (execute_add) ui.appendRow(ui.{__RETURN_DGV_NAME__}, newrow);
+
+
+    	ui.endEditing(ui.{__RETURN_DGV_NAME__})
+    	$('#{__DIALOG_ID__}').dialog('close');
+    }
+
+
+
+</script>

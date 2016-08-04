@@ -1,0 +1,37 @@
+
+		public function Save_Detil{__DETILNAME__}($id, $d) {
+			$TABLE = "{__DETILTABLE__}";
+			if (!is_array($d))
+				return;
+
+			FGTA_SqlUtil::RowUpdateDeleted($this->db, $TABLE, $d, $id, $this->FIELD_ID_MAPPING);
+
+			reset($d);
+			foreach ($d as $row) {
+				$obj = new stdClass;
+				{__DETIL_SQL_MAPPING__}
+
+				$_LINE  = $row['_LINE'];
+				$__STATE = $row['__STATE'];
+				switch ($__STATE) {
+
+					case "insert" :
+						$obj->{$this->FIELD_ID_MAPPING} = $id;
+						$obj->_LINE = $_LINE;
+						$cmd = FGTA_SqlUtil::CreateSQLInsert($TABLE, $obj);
+						FGTA_SqlUtil::PDO_Update($this->db, $cmd);
+						break;
+
+					case "update" :
+						$key = new stdClass;
+						$key->{$this->FIELD_ID_MAPPING} = $id;
+						$key->_LINE = $_LINE;
+						$cmd = FGTA_SqlUtil::CreateSQLUpdate($TABLE, $obj, $key);
+						FGTA_SqlUtil::PDO_Update($this->db, $cmd);
+						break;
+
+				}
+
+			}
+
+		}

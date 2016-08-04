@@ -1,0 +1,56 @@
+.icon-fgta-new{
+	background:url('../icon/fgta/tbtnNew.png') no-repeat center center;
+}
+
+.icon-fgta-edit{
+	background:url('../icon/fgta/tbtnEdit.png') no-repeat center center;
+}
+
+.icon-fgta-edit-cancel{
+	background:url('../icon/fgta/tbtnEditCancel.png') no-repeat center center;
+}
+
+.icon-fgta-save{
+	background:url('../icon/fgta/tbtnSave.png') no-repeat center center;
+}
+
+.icon-fgta-print{
+	background:url('../icon/fgta/tbtnPrint.png') no-repeat center center;
+}
+
+.icon-fgta-delete{
+	background:url('../icon/fgta/tbtnDel.png') no-repeat center center;
+}
+
+.icon-fgta-load{
+	background:url('../icon/fgta/tbtnLoad.png') no-repeat center center;
+}
+
+.icon-fgta-refresh{
+	background:url('../icon/fgta/tbtnRefresh.png') no-repeat center center;
+}
+
+.icon-fgta-rowadd{
+	background:url('../icon/fgta/tbtnRowAdd.png') no-repeat center center;
+}
+
+.icon-fgta-rowremove{
+	background:url('../icon/fgta/tbtnRowDel.png') no-repeat center center;
+}
+
+
+.icon-fgta-first{
+	background:url('../icon/fgta/tbtnFirst.png') no-repeat center center;
+}
+
+.icon-fgta-prev{
+	background:url('../icon/fgta/tbtnPrev.png') no-repeat center center;
+}
+
+.icon-fgta-next{
+	background:url('../icon/fgta/tbtnNext.png') no-repeat center center;
+}
+
+.icon-fgta-last{
+	background:url('../icon/fgta/tbtnLast.png') no-repeat center center;
+}

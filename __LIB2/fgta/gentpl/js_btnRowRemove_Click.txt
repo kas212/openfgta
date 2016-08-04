@@ -1,0 +1,4 @@
+
+            case "{__DETILNAME__}" :
+                ui.removeRow(ui.{__DGVDETIL__});
+                break;

@@ -1,0 +1,19 @@
+<?php
+$dat['obj_txt_FGEN_ID'] = [10, 20, 190];
+$dat['obj_txt_FGEN_NAME'] = [37, 20, 280];
+$dat['obj_cbo_FGEN_PROGTYPE'] = [64, 19, 180];
+$dat['obj_txt_FGEN_FOLDER'] = [146, 20, 190];
+$dat['obj_txt_FGEN_IDENT'] = [145, 214, 190];
+$dat['obj_txt_FGEN_TABLE'] = [91, 19, 250];
+$dat['obj_txt_FGEN_PK'] = [118, 20, 190];
+$dat['obj_chk_FGEN_ISAUTO'] = [11, 218, 180];
+$dat['obj_txt_FGEN_D1NAME'] = [10, 335, 190];
+$dat['obj_txt_FGEN_D1TABLE'] = [10, 528, 250];
+$dat['obj_txt_FGEN_D2NAME'] = [37, 335, 190];
+$dat['obj_txt_FGEN_D2TABLE'] = [37, 528, 250];
+$dat['obj_txt_FGEN_D3NAME'] = [64, 335, 190];
+$dat['obj_txt_FGEN_D3TABLE'] = [64, 527, 250];
+$dat['obj_txt_FGEN_D4NAME'] = [91, 335, 190];
+$dat['obj_txt_FGEN_D4TABLE'] = [91, 527, 250];
+$dat['obj_txt_FGEN_D5NAME'] = [117, 337, 180];
+$dat['obj_txt_FGEN_D5TABLE'] = [119, 527, 250];

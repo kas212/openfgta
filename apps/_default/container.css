@@ -1,0 +1,25 @@
+#header-inner{
+	text-align:left;
+	margin:0 auto;
+	padding:5px 10px 0px 10px;
+}
+
+.ui-header {
+	font-family:Verdana;
+	font-size:12px;	
+	color:#fff;	
+}
+
+.ui-header a {
+	font-family:Verdana;
+	font-size:12px;	
+	font-decoration: underline;	
+	color:#fff;	
+}
+
+.ui-header a:hover {
+	font-family:Verdana;
+	font-size:12px;	
+	font-decoration: underline;	
+	color:#ddd;	
+}

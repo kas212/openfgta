@@ -1,0 +1,26 @@
+
+		public function OpenData_Detil{__DETILNAME__}($id) {
+			$sql = "SELECT {__DETIL_SQL__}, \"_LINE\"
+			        FROM {__DETILTABLE__}
+					WHERE
+					{__FIELD_ID_MAPPING__} = :{__FIELD_ID_MAPPING__}
+					ORDER BY \"_LINE\"
+			";
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute(array(':{__FIELD_ID_MAPPING__}'=>$id));
+			$rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$records = array();
+			$line = 0;
+			foreach ($rows as $row)
+			{
+				$line = $row['_LINE'];
+				$records[] = array(
+						'_LINE' => $line,
+						{__DETIL_SQL_MAPPING__}
+				);
+			}
+
+			return ['records'=>$records, 'maxline'=>$line];
+
+		}

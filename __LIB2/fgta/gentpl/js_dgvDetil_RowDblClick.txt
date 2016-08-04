@@ -1,0 +1,12 @@
+function _{__DGVDETIL__}_RowDblClick(ui,index,row) {
+	if (ui.Editor.isReadOnly()) return;
+
+	if (ui.{__DGVDETIL__}.editIndex != index){
+		if (ui.endEditing(ui.{__DGVDETIL__})){
+			ui.{__DGVDETIL__}.datagrid('beginEdit', index);
+			ui.{__DGVDETIL__}.editIndex = index;
+		} else {
+	        ui.{__DGVDETIL__}.datagrid('selectRow', ui.{__DGVDETIL__}.editIndex);
+	    }
+	}
+}

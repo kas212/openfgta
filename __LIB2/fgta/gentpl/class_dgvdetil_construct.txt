@@ -1,0 +1,12 @@
+
+				new FGTA_Control_Datagrid(['name'=>'{__DGVDETIL__}', 'label'=>'{__LABEL__}',
+					'columnid'=>'group_id',
+					'allowaddremove'=>true,
+					'options'=>'
+						onDblClickRow: function(index,row) { _{__DGVDETIL__}_RowDblClick(ui,index,row) },
+						onClickCell: function(index, field) { ui.dgv_ClickCell(ui, ui.{__DGVDETIL__}, index) }
+								',
+					'columns' => [
+						{__COLUMNS__}
+					]
+				]),

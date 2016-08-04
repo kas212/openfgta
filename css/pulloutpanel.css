@@ -1,0 +1,704 @@
+/*
+Item Name : Pull Out Content Panel
+Author URI : http://codecanyon.net/user/Pixelworkshop
+Version : 1.12
+*/
+
+/*
+
+TABLE OF CONTENTS
+
+01 MENU CONTAINER
+02 TOGGLE BUTTON
+03 PANEL CAROUSEL
+04 PANEL CONTENT
+   1. Basic Typography
+   2. Default Lists
+   3. Icons Lists
+   4. Styled Lists
+   5. Styled Paragraphs
+   6. Videos & Images
+04 FORM ELEMENTS
+06 PANEL TOGGLES
+
+*/
+
+
+
+
+body {
+  background: #fafafa;
+  background: url("../img/bg2.png");
+}
+.page_wrapper {
+    position: relative;
+    max-width: 960px;
+    width:90%;
+    margin: 0 auto;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    line-height:21px;
+}
+.menu_description {margin: 52px auto;color: #262626;text-shadow:1px 1px 1px #ffffff;}
+.menu_description h1 {margin-top: 24px;font-size:24px;line-height:38px;}
+.menu_description h2 {font-size:18px;line-height:24px;}
+.menu_description ul {font-size:12px;line-height:21px;list-style: square;margin: 0 0 0 25px;padding: 0;}
+.menu_description a {color: #888;text-decoration: none;}
+
+
+
+
+/*  _______________________________________________
+
+    01 MENU CONTAINER
+    _______________________________________________  */
+
+
+
+
+.pocp_left,
+.pocp_right {
+    position: fixed;
+    top:0;
+    height: 100%;
+    z-index: 9999;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    line-height:21px;
+    -webkit-transition: all 0.4s 0.2s;
+    -moz-transition: all 0.4s 0.2s;
+    -o-transition: all 0.4s 0.2s;
+    transition: all 0.4s 0.2s;
+}
+.pocp_left {
+    left:-240px;
+}
+.pocp_right {
+    right:-240px;
+}
+.pocp_left.pocp_show {
+    left:0;
+}
+.pocp_right.pocp_show  {
+    right:0;
+}
+.pocp {
+    position: relative;
+    width: 240px;
+    height: 100%;
+    background: #191919;
+    color: #ddd;
+    text-shadow:1px 1px 1px #000000;
+    padding: 0;
+    -webkit-transition: all 0.4s 0.2s;
+    -moz-transition: all 0.4s 0.2s;
+    -o-transition: all 0.4s 0.2s;
+    transition: all 0.4s 0.2s;
+    -webkit-box-shadow: inset rgba(0,0,0,.25) -6px 0 8px;
+    -moz-box-shadow: inset rgba(0,0,0,.25) -6px 0 8px;
+    box-shadow: inset rgba(0,0,0,.25) -6px 0 8px;
+}
+
+/* CSS3 3D Animations - Chrome & Safari only */
+
+.pocp_left {
+    -webkit-perspective: 500;
+}
+.pocp_left .pocp {
+    -webkit-transform-origin: 0% 0%;
+    -webkit-transform: translateX(-50%) rotateY(90deg);
+}
+.pocp_left .pocp_active {
+    -webkit-transform: rotateY(0deg) translateX(0);
+}
+.pocp_right {
+    -webkit-perspective: 500;
+}
+.pocp_right .pocp {
+    -webkit-transform-origin: 100% 0%;
+    -webkit-transform: translateX(50%) rotateY(-90deg);
+}
+.pocp_right .pocp_active {
+    -webkit-transform: translateX(0) rotateY(0deg);
+}
+
+/* Optionnal overlay effect */
+
+#pocp_overlay {
+    background:rgba(0,0,0,0.5);
+    position:fixed;
+    display: none;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    z-index:9998;
+}
+
+
+
+
+/*  _______________________________________________
+
+    02 TOGGLE BUTTON
+    _______________________________________________  */
+
+
+
+
+.pocp_button {
+    position: fixed;
+    z-index: 9999;
+    top: 20px;
+    font-size: 14px;
+    color: #fff;
+    text-shadow:1px 1px 1px #000;
+    text-decoration: none;
+    padding: 0 12px;
+    background: #191919;
+    outline:none;
+    -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.3s 0.2s;
+    -moz-transition: all 0.3s 0.2s;
+    -o-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+}
+    .pocp_button i {
+        font-size: 18px;
+        line-height: 32px;
+        padding-top: 1px;
+        float: left;
+    }
+    .pocp_button_left {
+        left: 20px;
+    }
+    .pocp_button_left.btn_active {
+        left: 260px;
+    }
+    .pocp_button_right {
+        right: 20px;
+    }
+    .pocp_button_right.btn_active {
+        right: 260px;
+    }
+
+
+
+
+/*  _______________________________________________
+
+    03 PANEL CAROUSEL
+    _______________________________________________  */
+
+
+
+
+.pocp .pocp_carousel {
+    position: relative;
+    overflow: hidden;
+}
+.pocp .carousel_buttons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pocp #carousel_prev,
+.pocp #carousel_next {
+    position: absolute;
+    z-index: 2;
+    opacity:0.2;
+    width:24px;
+    height: 24px;
+    top: 6px;
+    display: block;
+    outline:none;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+.pocp #carousel_prev {
+    right: 36px;
+    background: url('../img/previous.png') center center no-repeat;
+}
+.pocp #carousel_next {
+    right: 6px;
+    background: url('../img/next.png') center center no-repeat;
+}
+.pocp #carousel_prev:hover,
+.pocp #carousel_next:hover {
+    opacity:0.7;
+}
+
+
+
+
+/*  _______________________________________________
+
+    04 PANEL CONTENT
+    _______________________________________________  */
+
+
+
+
+.pocp .pocp_content {
+    float: left;
+    width:200px;
+    padding: 0 20px;
+}
+.pocp .pocp_content_list {
+    width:100%;
+    padding: 0;
+}
+
+/* 1. Basic Typography */
+
+.pocp p,
+.pocp h1,
+.pocp h2,
+.pocp h3,
+.pocp h4,
+.pocp h5,
+.pocp h6,
+.pocp ul {
+
+}
+.pocp p {
+   margin: 0 0 21px 0;
+   line-height: 21px;
+}
+.pocp h1,
+.pocp h2,
+.pocp h3,
+.pocp h4,
+.pocp h5,
+.pocp h6 {
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.pocp h1 {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 21px;
+}
+.pocp h2 {
+    font-size: 20px;
+    line-height: 22px;
+    margin-bottom: 21px;
+}
+.pocp h3 {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 21px;
+}
+.pocp h4 {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom:14px;
+}
+.pocp h5 {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom:14px;
+}
+.pocp h6 {
+    font-size: 10px;
+    line-height: 16px;
+    margin-bottom:14px;
+    text-transform:uppercase;
+}
+.pocp a {
+    text-decoration: none;
+    color: #bbbbbb;
+    cursor: pointer;
+    -webkit-transition: color 0.2s;
+    -moz-transition: color 0.2s;
+    -o-transition: color 0.2s;
+    transition: color 0.2s;
+}
+.pocp a:hover {
+    color: #eeeeee;
+}
+
+/* 2. Default Lists */
+
+.pocp ul {
+    list-style: square;
+    padding-left: 16px;
+    margin-bottom: 21px;
+	margin-left:0;
+}
+.pocp ol {
+    padding-left: 16px;
+    margin-bottom: 21px;
+	margin-left:0;
+}
+
+/* 3. Icons Lists */
+
+.pocp .pocp_icons {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 21px -20px;
+    color: #eeeeee;
+}
+.pocp .pocp_icons li {
+    padding: 0 20px;
+    text-align: left;
+    border-radius: 0 3px 3px 0;
+    -webkit-transition: background 0.3s;
+    -moz-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
+}
+.pocp .pocp_icons li:hover {
+    background: #0a0a0a;
+}
+.pocp .pocp_icons a {
+    color: #eeeeee;
+}
+.pocp .pocp_icons i {
+    font-size: 14px;
+    width: 24px;
+    float: left;
+}
+.pocp .pocp_icons li,
+.pocp .pocp_icons i {
+    line-height: 28px;
+}
+
+/* 4. Styled Lists */
+
+.pocp .panel_list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 21px 0;
+    color: #eeeeee;
+}
+.pocp .panel_list li {
+}
+.pocp .panel_list li a {
+    padding: 12px 0 12px 20px;
+    width: 100%;
+    text-align: left;
+    display: block;
+    float: left;
+    font-size: 16px;
+    border-top: 1px solid #222222;
+    border-bottom: 1px solid #0a0a0a;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.pocp .panel_list li i {
+    margin-right: 12px;
+    font-size: 14px;
+}
+    .pocp .panel_list li:first-child a {
+        border-top: none;
+    }
+    .pocp .panel_list li:last-child a {
+        border-bottom: none;
+    }
+.pocp .panel_list li a:hover {
+    cursor: pointer;
+    background: #0d0d0d;
+}
+.pocp .panel_list .new {
+    color:#f22;
+    font-size: 65%;
+    vertical-align: super
+}
+
+/* 5. Styled Paragraphs */
+
+.pocp .blackbox {
+    padding: 12px;
+    background: #0a0a0a;
+    border-radius: 3px;
+}
+.pocp .dark, 
+.pocp .brown,
+.pocp .yellow,
+.pocp .red,
+.pocp .blue,
+.pocp .green {
+    padding:0 0 0 12px; 
+}
+    .pocp .dark {
+        border-left:#3B3B3B solid 7px;
+    }
+    .pocp .brown  {
+        border-left:#8D8767 solid 7px;
+    }
+    .pocp .yellow {
+        border-left:#DBA742 solid 7px;
+    }
+    .pocp .red {
+        border-left:#C05D48 solid 7px;
+    }
+    .pocp .blue {
+        border-left:#52878B solid 7px;
+    }
+    .pocp .green {
+        border-left:#808f4d solid 7px;
+    }
+
+/* 6. Videos & Images */
+
+.pocp .video_container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+    .pocp .video_container iframe,  
+    .pocp .video_container object,  
+    .pocp .video_container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border:none;
+        outline: none;
+    }
+.pocp iframe {
+    border:0;
+    outline: none;
+    width: 100%;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    margin-bottom: 12px;
+}
+.pocp img {
+    border:none;
+}
+.pocp .inline_img {
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 2px 3px #000000;
+    -moz-box-shadow: 0 2px 3px #000000;
+    -o-box-shadow: 0 2px 3px #000000;
+    box-shadow: 0 2px 3px #000000;
+    margin-bottom:18px;
+    margin-top: 6px;
+}    
+
+
+
+
+/*  _______________________________________________
+
+    05 FORM ELEMENTS
+    _______________________________________________  */
+
+
+
+
+.pocp .pocp_form {
+    display: block;
+    margin-bottom:10px;
+}
+.pocp .pocp_form label {
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.pocp .form_element {
+    width:92%;
+    padding:6px 4%;
+    margin:12px 0 18px 0;
+    color: #000000; 
+    background-color:#cccccc;
+    border:1px solid #000000;
+    -webkit-box-shadow: 0 1px 1px #000000;
+    -moz-box-shadow: 0 1px 1px #000000;
+    -o-box-shadow: 0 1px 1px #000000;
+    box-shadow: 0 1px 1px #000000;
+    -webkit-transition: background-color 0.3s ease-out;
+    -moz-transition: background-color 0.3s ease-out;
+    -o-transition: background-color 0.3s ease-out;
+    -ms-transition: background-color 0.3s ease-out;
+    transition: background-color 0.3s ease-out;
+}   
+    .pocp .form_element:hover{
+        background-color:#F4F4F4;
+        -webkit-box-shadow: 0 2px 2px #000000;
+        -moz-box-shadow: 0 2px 2px #000000;
+        -o-box-shadow: 0 2px 2px #000000;
+        box-shadow: 0 2px 2px #000000;
+    }
+    .pocp .form_element:focus {
+        background-color:#FFFFFF;
+        outline:none;
+    }
+
+.pocp .pocp_form textarea {
+    height:130px;
+    resize:none;
+}
+.pocp .pocp_form .required {
+    color:#C00;
+}
+.pocp .pocp_form .error, 
+.pocp .pocp_form .success {
+    width: 92%;
+    padding:6px 4%;
+    margin: 12px 0 6px 0;
+    color:#ffffff;
+    text-shadow:none;
+}
+    .pocp .pocp_form .error {
+        background:#E45635; 
+    }
+    .pocp .pocp_form .success {
+        background:#90AB76; 
+        margin-bottom: 12px;
+    }
+.pocp .pocp_form .button {
+    border: none;
+    margin:0 12px 0 0;
+    vertical-align: middle;
+    color: #ffffff;
+    text-shadow:1px 1px 1px #000;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 12px;
+    background: #0e0e0e;
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+    .pocp .pocp_form .button:active {
+    }
+    .pocp .pocp_form .button:hover, 
+    .pocp .pocp_form .button:focus {
+        background-color: #000000;
+    }
+.pocp .pocp_form .select_element {
+    float: left;
+    height: 28px;
+    padding:0 0 0 3%;
+    width:100%;
+    overflow: hidden;
+    position: relative;
+    border:none;
+    margin:12px 0 18px 0;
+}
+    .pocp .pocp_form .select_element select {
+        width:100%;
+        height:30px;
+        font-size:12px;
+        color: #999;
+        padding: 6px 0 6px 10px;
+        border: 0;
+        background: none;
+        outline: none;
+    }
+    .pocp .pocp_form .select_element select option {
+        background: #fdfdfd;
+        width: 100%;
+        color: #666;
+    }
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+
+        .pocp .pocp_form .select_element:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            margin-top: -3px;
+            border: 5px solid transparent;
+            border-top: 5px solid #333333;
+            pointer-events: none;
+        }
+        .pocp .pocp_form .select_element select,
+        .pocp .pocp_form .select_element select option {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+    }
+
+
+
+
+/*  _______________________________________________
+
+    06 PANEL TOGGLES
+    _______________________________________________  */
+
+
+
+
+.pocp .pocp_toggle {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 21px -20px;
+}
+    .pocp .pocp_toggle li {
+        margin-bottom: 9px;
+        cursor:pointer;
+    }
+    .pocp .pocp_toggle .pocp_toggle_title {
+        margin:0;
+        background: #0a0a0a;
+        border-radius: 0 3px 3px 0;
+        padding:6px 9px 6px 20px;
+        display: block;
+    }
+    .pocp .pocp_toggle .pocp_toggle_title:hover,
+    .pocp .pocp_toggle .pocp_toggle_title.toggle_active {
+        background: #000000;
+    }
+    .pocp .pocp_toggle .pocp_toggle_title.toggle_active {
+        border-radius: 0 3px 0 0;
+    }
+    .pocp .pocp_toggle .pocp_toggle_title i {
+        padding-top: 4px;
+        float: right;
+    }
+    .pocp .pocp_toggle .pocp_panel {
+        margin:0 0 9px 0;
+        display:none;
+        background: #0a0a0a;
+        padding:12px 20px 12px 20px;
+        border-radius: 0 0 3px 0;
+    }   
+    .pocp .pocp_toggle .pocp_panel_parent {
+        padding-right:0;
+    }   
+    .pocp .pocp_toggle .pocp_panel p {
+        margin-bottom:0;
+    }   
+
+    .pocp .pocp_panel > .pocp_toggle {
+        margin: -3px 0 0 -20px;
+    }
+    .pocp .pocp_panel > .pocp_toggle li {
+        margin-bottom: 3px;
+    }
+    .pocp .pocp_panel > .pocp_toggle .pocp_toggle_title {
+        display: block;
+        padding-left: 30px;
+    }
+   .pocp .pocp_panel > .pocp_toggle .pocp_panel {
+        margin:0;
+        padding:9px 20px 9px 30px;
+    }
+
+    .pocp_panel {
+    	cursor: initial;
+    }
+    

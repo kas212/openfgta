@@ -1,0 +1,26 @@
+.tbl_v1 {}
+
+.tbl_r_h_1 { 
+	font-family:Verdana; 
+	font-size:x-small; 
+	font-weight: bold; 
+	color: #FFFFFF;
+	text-align: center; 
+	background: #BCCE98; 
+	height: 25px;
+	padding: 5px 10px 5px 10px;
+}
+
+.tbl_r_c_1 { 
+	font-family:Verdana; 
+	font-size:small; 
+	font-weight: normal; 
+	background: #FFFFFF; 
+	padding: 5px 10px 5px 10px;
+	border-bottom: 1px solid #DAE9BC;
+}
+
+
+
+
+.tbl_r_f_1 { font-family:Verdana; font-size:small; font-weight: bold; text-align: right;}

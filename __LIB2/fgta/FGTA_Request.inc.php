@@ -14,7 +14,8 @@ class FGTA_Request
 	protected static function LoadConfig($CONFIG_DIR)
 	{
 		if (defined('__USERCONFIG_FOLDER'))
-			$CONFIG_DIR = __USERCONFIG_FOLDER;
+			if (is_file(__USERCONFIG_FOLDER))
+				$CONFIG_DIR = __USERCONFIG_FOLDER;
 
 		require_once $CONFIG_DIR."/database.conf.php";
 		require_once $CONFIG_DIR."/page.conf.php";

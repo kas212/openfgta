@@ -1,7 +1,6 @@
 <?php
 define('__ROOT_DIR', dirname(__FILE__));
-// apabila folder konfigurasi mau dipindah, uncomment baris berikut
-// define('__USERCONFIG_FOLDER', __ROOT_DIR.'/../fgtaframework.conf');
+define('__USERCONFIG_FOLDER', __ROOT_DIR.'/../'.basename(__ROOT_DIR).'.conf');
 
 
 // EasyUI yang digunakan

@@ -1,10 +1,10 @@
 <?php
 
+
     class welcome extends FGTA_Content
     {
 
         public function LoadPage() {
-
 
         }
 

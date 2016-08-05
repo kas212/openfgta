@@ -636,7 +636,7 @@
 			try {
 
 				$table_prefix = substr($tablename, 0, 4);
-				if ($table_prefix!='MST_' && $table_prefix!='TRN_' && $table_prefix!='RPT_')
+				if ($table_prefix!='FGT_' && $table_prefix!='MST_' && $table_prefix!='TRN_' && $table_prefix!='RPT_')
 					throw new Exception("Prefix table ($table_prefix) tidak sesuai dengan frmaework");
 
 				$entityname = str_replace($table_prefix, '', $tablename);
@@ -675,7 +675,7 @@
 				return $obj;
 
 			} catch (Exception $e) {
-				throw new Exception('Error in LoadEmployeeByDept.\r\n' . $e->getMessage());
+				throw new Exception('Error in LoadTableField.\r\n' . $e->getMessage());
 			}
 		}
 

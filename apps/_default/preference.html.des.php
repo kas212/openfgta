@@ -114,6 +114,13 @@
 					var username = data.username;
 					var pic = document.getElementById("obj_Profile");
 					var file = pic.files[0];
+
+					ui.obj_txt_PASSOLD.textbox('clear');
+					ui.obj_txt_PASS1.textbox('clear');
+					ui.obj_txt_PASS2.textbox('clear');
+
+
+
 					if (file!=undefined) {
 						var xhr = new XMLHttpRequest();
 						(xhr.upload || xhr).addEventListener('progress', function(e) {
@@ -127,6 +134,8 @@
 						   //console.log('xhr upload complete' , e, this.responseText);
 						   if (this.responseText!='ok') {
 							   $.messager.alert("Upload Image Error", this.responseText.replace("\\r", '').replace("\\n", '<br />'), "error");
+						   } else {
+							   $.messager.alert("Preference", "Changed has been saved." , "info").window({shadow:false});
 						   }
 						   ui.canvas.unmask();
 					   	});
@@ -137,9 +146,12 @@
 						postdata.append('file', file);
 						postdata.append('username',  ui.obj_txt_USERNAME.textbox('getValue'));
 						xhr.send(postdata);
+
+
 					}
 					else
 					{
+						$.messager.alert("Preference", "Changed has been saved." , "info").window({shadow:false});
 						ui.canvas.unmask();
 					}
 				}
@@ -162,7 +174,6 @@
 		<form id="formMain">
 
 	        <?php
-
 	        new FGTA_Control_Textbox(['name'=>'obj_txt_USERNAME', 'label'=>'Username', 'directrender'=>true, 'location'=>[30, 40, 200], 'options'=>'disabled:true' ]);
 	        new FGTA_Control_Textbox(['name'=>'obj_txt_FULLNAME', 'label'=>'Full Name', 'directrender'=>true, 'location'=>[60, 40, 350], 'options'=>'disabled:true' ]);
 
@@ -171,7 +182,6 @@
 	        new FGTA_Control_Textbox(['name'=>'obj_txt_PASS2', 'label'=>'Re-Enter', 'password'=>true, 'directrender'=>true, 'location'=>[190, 40, 200], 'options'=>"" ]);
 
 	        new FGTA_Control_Combobox(['name'=>'obj_cbo_WELCOME', 'label'=>'1stPage', 'directrender'=>true, 'location'=>[240, 40, 400], 'options'=>"editable:false,valueField:'id',textField:'text',data:WELCOMEPAGE " ]);
-
 	        ?>
 
 
@@ -181,7 +191,7 @@
 	        </div>
 
 
-			<div class="fgta_field" style="top:10px; left:667px; width:250px; border: 0px ">
+			<div class="fgta_field" style="top:10px; left:450px; width:250px; border: 0px ">
 				<img id="image" height="300" width="300"/>
 				<input id="obj_Profile" type="file">
 			</div>

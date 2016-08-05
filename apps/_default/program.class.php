@@ -421,6 +421,7 @@
 				$selected_program_rows[] = array('PROGRAM_ID'=>'GROUP', 'PROGRAM_TYPE'=>'MST', 'PROGRAM_NAME'=>'Group','PROGRAM_PATH'=>'Framework','PROGRAM_NS'=>'_default','PROGRAM_INSTANCE'=>'group', 'PROGRAM_ICON'=>'');
 				$selected_program_rows[] = array('PROGRAM_ID'=>'PROGRAM', 'PROGRAM_TYPE'=>'MST', 'PROGRAM_NAME'=>'Program','PROGRAM_PATH'=>'Framework','PROGRAM_NS'=>'_default','PROGRAM_INSTANCE'=>'program', 'PROGRAM_ICON'=>'');
 				$selected_program_rows[] = array('PROGRAM_ID'=>'FGEN', 'PROGRAM_TYPE'=>'MST', 'PROGRAM_NAME'=>'Generator','PROGRAM_PATH'=>'Framework','PROGRAM_NS'=>'_default','PROGRAM_INSTANCE'=>'fgen', 'PROGRAM_ICON'=>'');
+				$selected_program_rows[] = array('PROGRAM_ID'=>'CONTENT', 'PROGRAM_TYPE'=>'MST', 'PROGRAM_NAME'=>'Content','PROGRAM_PATH'=>'Framework','PROGRAM_NS'=>'_default','PROGRAM_INSTANCE'=>'content', 'PROGRAM_ICON'=>'');
 				//$selected_program_rows[] = array('PROGRAM_ID'=>'TESTDEV', 'PROGRAM_TYPE'=>'MST', 'PROGRAM_NAME'=>'Test Device','PROGRAM_PATH'=>'Framework','PROGRAM_NS'=>'_default','PROGRAM_INSTANCE'=>'testdev', 'PROGRAM_ICON'=>'');
 			}
 

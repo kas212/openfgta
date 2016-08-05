@@ -111,9 +111,29 @@ class FGTA_Main extends FGTA_Request
 		                break;
 
 					case "welcome" :
-						require_once self::$_ROOT_DIR . "/apps/_default/welcome.class.php";
-				        $TPLFILE = self::$_ROOT_DIR . "/apps/_default/welcome.html.des.php";
-				        $CLASS = "welcome";
+						$user_1stpage = '_default/fgtatoday';
+
+						$welcomepage_class = __ROOT_DIR.'/apps/'.$user_1stpage.'.class.php';
+						$welcomepage_des = __ROOT_DIR.'/apps/'.$user_1stpage.'.html.des.php';
+						if (!is_file($welcomepage_des))
+							$welcomepage_des = __ROOT_DIR.'/apps/'.$user_1stpage.'.html.php';
+
+						if (is_file($welcomepage_class) && is_file($welcomepage_des)) {
+							require_once $welcomepage_class;
+					        $TPLFILE = $welcomepage_des;
+							$t = explode('/', $user_1stpage);
+							$CLASS = $t[1];
+						} else {
+
+							$_SESSION['WELCOME_ERROR_MESSAGE'] = '';
+							if (!empty($user_1stpage))
+								 $_SESSION['WELCOME_ERROR_MESSAGE'] = "One or more First page program (class/html) '$user_1stpage' is not found!<br><ul><li>$welcomepage_class</li><li>$welcomepage_des</li></ul>";
+
+							require_once self::$_ROOT_DIR . "/apps/_default/welcome.class.php";
+					        $TPLFILE = self::$_ROOT_DIR . "/apps/_default/welcome.html.des.php";
+					        $CLASS = "welcome";
+						}
+
 				        $PAGE_TITLE = __PAGE_TITLE . " - Welcome";
 				        self::$_DEFAULT_DIR = self::$_ROOT_DIR . "/apps/" . self::$_DEFAULT_CLASS_NAME;
 						break;

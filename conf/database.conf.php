@@ -6,7 +6,7 @@ $DBCONF = [
 		'host' => "localhost",
 		'user' => "SYSDBA",
 		'pass' => "masterkey",
-		'dbname' => "/var/database/FGTAFRAMEWORK.FDB",
+		'dbname' => "/var/database/openfgta.fdb",
 		'role' => ""
 	],
 ];

@@ -170,7 +170,7 @@
     <div  id="left-panel" data-role="panel"  data-display="overlay" data-theme="a">
     <!-- LEFT PANEL -->
             <div style="margin:0px auto;width:100px;height:100px;border-radius:100px;overflow:hidden">
-                <img  src="service.json.php?ns=hrms&cl=employee&sm=GetImage&imgid=<?=$EMPLOOYE_ID?>" style="margin:0;width:100%;height:100%;">
+                <img  src="service.json.php?ns=_default&cl=preference&sm=GetImage&username=<?=$_SESSION['username']?>" style="margin:0;width:100%;height:100%;">
             </div>
 
             <center><b><?=$USERFULLNAME?></b></center><br>

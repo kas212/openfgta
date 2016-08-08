@@ -29,7 +29,9 @@ var contentClass = function () {
 
 
 function _btnNew_Click(ui) {
-	ui.Editor.new();
+	ui.Editor.new(function() {
+		ui.Editor.setValue(ui.Editor.obj_txt_CONTENTTYPE_ID, 'NEWS', 'News');
+	});
 }
 
 function _btnEdit_Click(ui) {
@@ -48,7 +50,7 @@ function _btnSave_Click(ui) {
 			__STATE: ui.Editor.getFormDataState(),
 		},
 		D: {
-			
+
 		}
 	});
 }
@@ -68,14 +70,14 @@ function _btnLoad_Click(ui, pageNumber, pageSize) {
 function _btnRowadd_Click(ui) {
 	var opts = ui.tabMainDetil.tabs('getSelected').panel('options');
 	switch (opts.title) {
-        
+
 	}
 }
 
 function _btnRowremove_Click(ui) {
 	var opts = ui.tabMainDetil.tabs('getSelected').panel('options');
 	switch (opts.title) {
-        
+
 	}
 }
 
@@ -88,9 +90,9 @@ function _open_data(ui, id) {
 			ui.Editor.setValue(ui.Editor.obj_dt_CONTENT_PUBLISHDATE, data.CONTENT_PUBLISHDATE);
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_TITLE, data.CONTENT_TITLE);
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_TEXT, data.CONTENT_TEXT);
-			ui.Editor.setValue(ui.Editor.obj_txt_CONTENTTYPE_ID, data.CONTENTTYPE_ID);
+			ui.Editor.setValue(ui.Editor.obj_txt_CONTENTTYPE_ID, data.CONTENTTYPE_ID, data.CONTENTTYPE_NAME);
 
-			
+
 
 			ui.btnEdit.linkbutton('enable');
 		}

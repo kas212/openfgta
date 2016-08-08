@@ -20,10 +20,10 @@
 					pagination:true
 				',
 				'columns' => [
-					['label'=>'ID', 'mapping'=>'CONTENT_ID', 'options'=>'width:100'],
+					['label'=>'ID', 'mapping'=>'CONTENT_ID', 'options'=>'width:100,hidden:true'],
+					['label'=>'Title', 'mapping'=>'CONTENT_TITLE', 'options'=>'width:400'],
+					['label'=>'Type', 'mapping'=>'CONTENTTYPE_ID', 'options'=>'width:100'],
 					['label'=>'Publish', 'mapping'=>'CONTENT_PUBLISHDATE', 'options'=>'width:100'],
-					['label'=>'Title', 'mapping'=>'CONTENT_TITLE', 'options'=>'width:100'],
-					['label'=>'Type', 'mapping'=>'CONTENTTYPE_ID', 'options'=>'width:100']
 				]
 			]);
 
@@ -36,9 +36,9 @@
 			$this->Editor = array(
 				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_ID', 'label'=>'ID',  'options'=>"" ]),
 				new FGTA_Control_Datebox(['name'=>'obj_dt_CONTENT_PUBLISHDATE', 'label'=>'Publish',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TITLE', 'label'=>'Title',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TEXT', 'label'=>'text',  'suppress'=>true, 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENTTYPE_ID', 'label'=>'Type',  'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TITLE', 'label'=>'Title',  'maxlength'=>'60', 'options'=>"required:true,missingMessage:'Title harus diisi'" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TEXT', 'label'=>'text',  'maxlength'=>'65535', 'suppress'=>true, 'options'=>"" ]),
+				new FGTA_Control_Combobox(['name'=>'obj_txt_CONTENTTYPE_ID', 'label'=>'Type',  'options'=>"editable:false,valueField:'id',textField:'text',data:DATA['CONTENTTYPE']" ]),
 
 			);
 
@@ -119,13 +119,13 @@
 
 		 	$row = $rows[0];
 
-
 			$obj = new stdClass;
 			$obj->CONTENT_ID = $row['CONTENT_ID'];
 			$obj->CONTENT_PUBLISHDATE = FGTA_SqlUtil::ToJSDate($row['CONTENT_PUBLISHDATE']);
 			$obj->CONTENT_TITLE = $row['CONTENT_TITLE'];
 			$obj->CONTENT_TEXT = $row['CONTENT_TEXT'];
 			$obj->CONTENTTYPE_ID = $row['CONTENTTYPE_ID'];
+			$obj->CONTENTTYPE_NAME = array('ARTICLE'=>'Article','EVENT'=>'Event','NEWS'=>'News')[$obj->CONTENTTYPE_ID];
 
 			$obj->_recordcreateby = $row["_CREATEBY"];
 			$obj->_recordcreatedate = $row["_CREATEDATE"];
@@ -141,7 +141,7 @@
 
 
 		public function NewId($H) {
-			return "testid";
+			return uniqid();
 		}
 
 		public function Save($H, $D) {
@@ -173,7 +173,7 @@
 			$obj = new stdClass;
 			$obj->CONTENT_PUBLISHDATE = FGTA_SqlUtil::ToSQLDate($H['CONTENT_PUBLISHDATE']);
 			$obj->CONTENT_TITLE = $H['CONTENT_TITLE'];
-			$obj->CONTENT_TEXT = $H['CONTENT_TEXT'];
+			//$obj->CONTENT_TEXT = $H['CONTENT_TEXT'];
 			$obj->CONTENTTYPE_ID = $H['CONTENTTYPE_ID'];
 
 
@@ -197,6 +197,10 @@
 
 			FGTA_SqlUtil::PDO_Update($this->db, $cmd);
 
+			$sql = "UPDATE FGT_CONTENT SET CONTENT_TEXT=:CONTENT_TEXT WHERE CONTENT_ID='$id' ";
+			$stmt = $this->db->prepare($sql);
+			$stmt->bindParam(':CONTENT_TEXT', $H['CONTENT_TEXT'], PDO::PARAM_LOB);
+			$stmt->execute();
 
 			return $id;
 		}

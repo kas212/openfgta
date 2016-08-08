@@ -1,7 +1,8 @@
 <script>
     var ui;
     var DATA = {
-            };
+        'CONTENTTYPE': [{'id':'ARTICLE','text':'Article'},{'id':'EVENT','text':'Event'},{'id':'NEWS','text':'News'}]
+    };
 
     $(document).ready(function () {
         ui = new contentClass();

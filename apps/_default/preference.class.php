@@ -83,11 +83,11 @@
 			if (isset($_FILES['file']) )  {
 				try {
 					if (!is_dir(__DATA_FOLDER))
-						throw new Exception(__DATA_FOLDER . 'belum diset atau tidak ditemukan!');
+						throw new Exception(__DATA_FOLDER . ' belum diset atau tidak ditemukan!');
 
 					$target_dir = __DATA_FOLDER . '/profiles/';
 					if (!is_dir($target_dir))
-						throw new Exception($target_dir . 'belum diset atau tidak ditemukan!');
+						throw new Exception($target_dir . ' belum diset atau tidak ditemukan!');
 
 					$userprofiledir = $target_dir . $username . '/';
 					if (!is_dir($userprofiledir))

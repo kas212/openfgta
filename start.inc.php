@@ -18,8 +18,10 @@ define('__SELECTION_DEFAULT', "{'id':'".__SELECTION_DEFAULT_VALUE."','text':'"._
 
 
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+  define('__IS_WINDOWS', true);
   ini_set("include_path", ".;".__ROOT_DIR."\\__LIB2");
 } else {
+   define('__IS_WINDOWS', false);		
   ini_set("include_path", ".:".__ROOT_DIR.'/__LIB2');
 }
 

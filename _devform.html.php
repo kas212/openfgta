@@ -42,7 +42,7 @@
         <a id="btnSetWidth" class="easyui-linkbutton c2" style="height: 22px">Apply</a>
     </div>
 
-    <div id="layouteditor" data-options="region:'center'" border="false" style="background: url('/firebird/img/bg_devform.png')">
+    <div id="layouteditor" data-options="region:'center'" border="false" style="background: url('img/bg_devform.png')">
         <form id="formMain">
             <?php
             if ($editormode=='search') {

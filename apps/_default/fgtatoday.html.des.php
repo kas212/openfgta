@@ -37,7 +37,7 @@
 
             <div data-options="region:'north'" border="false" style="height: 100px">
                 <div style="float: right; padding: 0px 0px 0px 0px; margin: 10px 5px; width:80px;height:80px;border-radius:100px;overflow:hidden">
-                    <img  src="service.json.php?ns=_default&cl=preference&sm=GetImage&username=<?=$_SESSION['username']?>" style="margin:0;width:100%;height:100%;">
+                    <a href="javascript:parent._Preference_Open();"><img  src="service.json.php?ns=_default&cl=preference&sm=GetImage&username=<?=$_SESSION['username']?>" style="margin:0;width:100%;height:100%;"></a>
                 </div>
                 <div style="padding: 10px 0px 5px 0px;">
         			<div>

@@ -1,4 +1,7 @@
 <?php
+if (!defined('__OPENFGTA__'))
+	die('Cannot access file directly');
+
 
 $DBCONF = [
 	/* Main Database, menggunakan firebird */

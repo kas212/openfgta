@@ -1,6 +1,8 @@
 <?php
+	if (!defined('__OPENFGTA__'))
+		die('Cannot access file directly');
 
-    class FGTA_Control_Combobox extends FGTA_Control
+	class FGTA_Control_Combobox extends FGTA_Control
     {
         function __construct($opt) {
             $this->process_opt($opt);

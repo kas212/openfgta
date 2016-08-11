@@ -1,4 +1,7 @@
 <?php
+	if (!defined('__OPENFGTA__'))
+		die('Cannot access file directly');
+
 
     class FGTA_Control_ComboboxSearch extends FGTA_Control
     {

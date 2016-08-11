@@ -1,4 +1,7 @@
 <?php
+if (!defined('__OPENFGTA__'))
+	die('Cannot access file directly');
+
 
     class FGTA_Session
     {
@@ -61,7 +64,7 @@
             $stmt = $db->prepare($sql);
             $stmt->execute(array(
                 ':SESS_ID' => $session_id
-            ));            
+            ));
         }
 
 

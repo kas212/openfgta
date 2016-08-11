@@ -1,4 +1,6 @@
 <?php
+if (!defined('__OPENFGTA__'))
+	die('Cannot access file directly');
 
 
 // true:  boleh langsung akses ke folder apss ?

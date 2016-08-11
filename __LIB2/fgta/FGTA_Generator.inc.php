@@ -1,4 +1,7 @@
 <?php
+	if (!defined('__OPENFGTA__'))
+		die('Cannot access file directly');
+
 
     define('__TPL_HTML', dirname(__FILE__)."/gentpl/html.txt");
     define('__TPL_JS', dirname(__FILE__)."/gentpl/js.txt");

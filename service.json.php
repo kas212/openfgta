@@ -1,4 +1,7 @@
 <?php
+define('__OPENFGTA__', 1);
+
+
 header("QueryString: ". $_SERVER['QUERY_STRING']);
 define('FGTA_WebService', true);
 

@@ -1,4 +1,8 @@
 <?php
+if (!defined('__OPENFGTA__'))
+	die('Cannot access file directly');
+
+
 require_once dirname(__FILE__)."/FGTA_WebService.inc.php";
 require_once dirname(__FILE__)."/FGTA_PageNavigation.inc.php";
 

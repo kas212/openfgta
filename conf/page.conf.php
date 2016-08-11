@@ -1,4 +1,7 @@
 <?php
+if (!defined('__OPENFGTA__'))
+	die('Cannot access file directly');
+
 
 define('__PAGE_TITLE', 'FGTA');
 define('__COMPANY_PREFIX', 'FGT');

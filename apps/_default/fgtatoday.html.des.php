@@ -49,22 +49,58 @@
 
             <div data-options="region:'east'" border="false" style="width: 300px">
                 <div class="easyui-layout" data-options="fit:true">
-                    <div data-options="region:'north'" border="false" style="height: 200px">
-                        Event
+                    <div data-options="region:'north'" border="false" style="height: 200px;">
+                        <div style="height: 25px"><b>:: Pengumuman</b></div>
+                        <div  class="easyui-panel" data-options="fit:true" style="border: 0px; border-left: 1px #CCCCCC solid">
+                            <div style="border-left: 2px #CCCCCC solid; padding-left: 5px">
+								<?php
+
+				                    $rows = $this->GetTodayContent('EVENT', 3);
+				                    foreach ($rows as $row) {
+				                ?>
+			                    <b><?=$row['CONTENT_TITLE']?></b><br>
+			                    <?=substr($row['CONTENT_TEXT'],0,30)?>
+								<hr style="border-top: dashed 1px; color: #DDDDDD" />
+				                <?php } ?>
+
+                            </div>
+                        </div>
                     </div>
-                    <div data-options="region:'center'" border="false">
-                        Article
+                    <div data-options="region:'center'" border="false" style="padding-top: 20px">
+                        <div style="height: 25px"><b>:: Article</b></div>
+                        <div  class="easyui-panel" data-options="fit:true" style="border: 0px; border-left: 1px #CCCCCC solid">
+
+							<?php
+								$rows = $this->GetTodayContent('ARTICLE', 10);
+								foreach ($rows as $row) {
+							?>
+							<div style="border-left: 2px #CCCCCC solid; padding-left: 5px">
+                                <b><?=$row['CONTENT_TITLE']?></b><br>
+                                <span style="color: #999999"><small>9 Juni 2019</small></span><br>
+                                <?=substr($row['CONTENT_TEXT'],0,30)?>
+                                <hr style="border-top: dashed 1px; color: #DDDDDD" />
+                            </div>
+
+							<?php } ?>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div data-options="region:'center'" border="false">
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
-                news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>news<br>
+                <?php
+                    $rows = $this->GetTodayContent('NEWS');
+                    foreach ($rows as $row) {
+                ?>
+                <div style="border-left: 2px #CCCCCC solid; padding-left: 5px; margin-bottom: 15px; margin-right: 10px">
+                    <b><?=$row['CONTENT_TITLE']?></b><br>
+                    <span style="color: #999999"><small>9 Juni 2019</small></span><br>
+                    <?=substr($row['CONTENT_TEXT'],0,200)?>
+                </div>
+                <?php } ?>
+
             </div>
 
         </div>

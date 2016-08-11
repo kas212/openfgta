@@ -89,6 +89,7 @@ class FGTA_Main extends FGTA_Request
 		                require_once 'fgta/FGTA_Control_Datagrid.inc.php';
 		                require_once 'fgta/FGTA_Control_TextboxSearch.inc.php';
 		                require_once 'fgta/FGTA_Control_ComboboxSearch.inc.php';
+						require_once "fgta/FGTA_Control_File.inc.php";
 
 		                require_once self::$_REQUEST['app_file'];
 		                $CLASS = self::$_REQUEST['class'];
@@ -101,6 +102,7 @@ class FGTA_Main extends FGTA_Request
 		            case "logout" :
 						FGTA_Session::RemoveSession(self::$db, session_id());
 		                $_SESSION['islogin'] = false;
+						$_SESSION['themecolor'] = $_SESSION['new_themecolor'];
 		                require_once self::$_REQUEST['app_file_login'];
 		                $TPLFILE = self::$_REQUEST['tpl_file_login'];
 		                $CLASS = "login";
@@ -175,6 +177,8 @@ class FGTA_Main extends FGTA_Request
 			$dcon = ob_get_contents();
 			ob_end_clean();
 
+
+			$objApp->THEME_COLOR = array_key_exists('themecolor', $_SESSION) ? $_SESSION['themecolor'] : '';
 			$objApp->Render('_template.html.des.php', $dcon, $objApp);
 
 		}

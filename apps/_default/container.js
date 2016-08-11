@@ -173,8 +173,9 @@
 	function _Program_Open(ui, program) {
 	    ui.obj_region_menu.mask();
 
-	    var tabcontent = '<iframe class="easyui-layout" onload="javascript: ui.Iframe_Loaded(this, \'' + program.name + '\')" frameborder="0" src="' + program.url + '" data-options="fit:true"></iframe>';
-	    ui.obj_tab_main.tabs('add', {
+	    //var tabcontent = '<iframe class="easyui-layout" style="border-left: 1px solid #000" onload="javascript: ui.Iframe_Loaded(this, \'' + program.name + '\')" frameborder="0" src="' + program.url + '" data-options="fit:true"></iframe>';
+		var tabcontent = fn_iframe(program);
+		ui.obj_tab_main.tabs('add', {
 	        title: program.name,
 	        content: tabcontent,
 	        closable: true

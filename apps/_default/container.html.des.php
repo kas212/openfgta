@@ -1,5 +1,6 @@
 	<script>
 		var ui;
+		var fn_iframe = function(program) { return '<iframe class="easyui-layout" style="border-left: 1px solid <?=$this->GetBorderColor()?>" onload="javascript: ui.Iframe_Loaded(this, \'' + program.name + '\')" frameborder="0" src="' + program.url + '" data-options="fit:true"></iframe>'; }
 
 		$(document).ready(function () {
 			ui = new ContainerClass();
@@ -72,12 +73,11 @@
 	</div>
 
 
-
 	<div data-options="region:'west',split:true, headerCls:'messager-window'" border="false" title="Solution" style="width:240px; ">
 		<div id="region_menu" class="easyui-panel" border="false"  data-options="fit:true, onResize: function(e) { on_menu_resize(); }">
 			<div class="easyui-layout" data-options="fit:true" >
 				<div data-options="region:'north'" border="false">
-					<div class="easyui-panel" border="false" style="padding: 0px 5px 0px 5px; background: #eee; border-right: 1px solid #ddd" data-options="fit:true">
+					<div class="easyui-panel" border="false" style="padding: 0px 5px 0px 5px; background: <?=$this->GetBgColor()?>; border-right: 1px solid <?=$this->GetBorderColor()?>" data-options="fit:true">
 						<div style="padding-top: 10px; padding-bottom: 3px;">
 						<div class="ui-label" style="float:right; width: 40px; padding-right: 5px;"><a id="cnt_btn_groupreload" href="javascript:_ComboboxGroup_LoadData(ui)">reload</a></div>
 						<div class="ui-label" >Group</div>
@@ -90,8 +90,8 @@
 					</div>
 				</div>
 			</div>
-			<div data-options="region:'center'" border="false" style="padding: 0px 5px 5px 5px; background: #eee; border-right: 1px solid #ddd">
-					<div class="easyui-panel" border="true" data-options="fit:true">
+			<div data-options="region:'center'" border="false" style="padding: 0px 5px 5px 5px; background: <?=$this->GetBgColor()?>; border-right: 1px solid <?=$this->GetBorderColor()?>">
+					<div class="easyui-panel" border="true" data-options="fit:true" style="border-top: 1px solid <?=$this->GetBorderColor()?>; border-left: 1px solid <?=$this->GetBorderColor()?>">
 						<ul id="cnt_tree_program" class="easyui-tree" data-options="fit:true"></ul>
 					</div>
 				</div>
@@ -102,6 +102,6 @@
 
 	<div data-options="region:'center'">
 		<div id="main_tabs" class="easyui-tabs" fit="true" border="false" plain="true">
-			<div title="welcome" href="?mode=welcome"></div>
+			<div title="welcome" style="border-left: 1px solid <?=$this->GetBorderColor()?>" href="?mode=welcome"></div>
 		</div>
 	</div>

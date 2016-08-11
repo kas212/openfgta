@@ -102,6 +102,7 @@ var FGTA_Editor = function()
             if (typeof editor[m] == "object" && typeof editor[m].prop === 'function') {
                 if (editor[m].prop("type") == "fgta_object") {
                 } else if (editor[m].prop("type")=="checkbox") {
+					//tangani checkbox
                     if (editor[m].attr("isdisabled")=="false") {
                         editor[m].parent().children().each(function() {
                             if ($(this).is(':checkbox')) {
@@ -121,6 +122,8 @@ var FGTA_Editor = function()
                         });
                     }
                 } else {
+					// tangani selain checkbox (berbasis textbox)
+
                     var background_disabled =  getStyleRuleValue('background', '.textbox-text-noneditable');
                     var background_readandwrite = getStyleRuleValue('background', '.fgta-textbox-text-readandwrite');
                     var background_readonly = getStyleRuleValue('background', '.fgta-textbox-text-readonly');
@@ -131,10 +134,22 @@ var FGTA_Editor = function()
                         editor[m].textbox('textbox').removeClass('fgta-textbox-text-readandwrite').removeClass('fgta-textbox-text-readonly');
                         editor[m].textbox('textbox').css('background', background_disabled);
                     } else {
-                        editor[m].textbox('readonly', readonly);
-                        editor[m].textbox('textbox').removeClass('fgta-textbox-text-readandwrite').removeClass('fgta-textbox-text-readonly').addClass(!readonly ? 'fgta-textbox-text-readandwrite' : 'fgta-textbox-text-readonly');
-                        editor[m].textbox('textbox').css('background', !readonly ? background_readandwrite : background_readonly);
+						editor[m].textbox('readonly', readonly);
+						editor[m].textbox('textbox').removeClass('fgta-textbox-text-readandwrite').removeClass('fgta-textbox-text-readonly').addClass(!readonly ? 'fgta-textbox-text-readandwrite' : 'fgta-textbox-text-readonly');
+						editor[m].textbox('textbox').css('background', !readonly ? background_readandwrite : background_readonly);
+
+						// tangani apabila typenya adalah filebox (juga termasuk berbasis textbox)
+						if (editor[m].Ftype=="FGTA_Control_File") {
+							var objtext = $($(editor[m].parent().children()[2]).find(":text")[0]);
+							objtext.removeClass('fgta-textbox-text-readandwrite').removeClass('fgta-textbox-text-readonly').addClass('fgta-textbox-text-readonly');
+							objtext.css('background', background_readonly);
+							objtext.attr("disabled", true);
+							$($(editor[m].parent().children()[2]).find(":file")[0]).attr("disabled", !readonly ? false : true);
+						}
                     }
+
+
+
                 }
             }
         }
@@ -177,7 +192,7 @@ var FGTA_Editor = function()
 
         if (!editmode)
         {
-            changeCss('.datagrid-row-selected', 'background: #338FFF; color: #FFFFFF');
+            changeCss('.datagrid-row-selected', getDataGridRowSelectedStyle());
             if (ui.Editor.isDataNew()) {
                 ui.tabMain.tabs('select', 'List');
                 ui.tabMain.tabs(ui.dgvList.datagrid('getData').total>0 ? 'enableTab' : 'disableTab', 'Data');
@@ -223,6 +238,10 @@ var FGTA_Editor = function()
 
                 editor.FormDataText[obj.name] = text;
                 break;
+
+			case 'FGTA_Control_File' :
+				$($(obj.parent().children()[2]).find(":text")[0]).val(value);
+				break;
 
             case 'FGTA_Control_Checkbox' : obj.prop('checked', value); break;
             case 'FGTA_Control_Datebox'  : obj.datebox('setValue', value);

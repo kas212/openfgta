@@ -8,12 +8,26 @@
         }
 
         public function GetPrefData($username) {
+			$db = $this->db;
 			try {
             	if ($username != $_SESSION['username'])
 					throw new Exception("Session is invalid for '$username'");
 
+
+				$sql = "SELECT * FROM FGT_USER WHERE USER_ID = :USER_ID";
+				$stmt = $db->prepare($sql);
+				$stmt->execute(array(
+						':USER_ID' => $username
+					));
+
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+				if (count($row)==0)
+					throw new Exception("Username '$username' tidak ditemukan.");
+
 				$obj = new stdClass;
 				$obj->fullname = $_SESSION['userfullname'];
+				$obj->themecolor = (empty($row['USER_THEMECOLOR'])) ? '' : $row['USER_THEMECOLOR'];
+				$obj->firstpage =  (empty($row['USER_FIRSTPAGE']) || $row['USER_FIRSTPAGE']=='') ? '_default/fgtatoday' : $row['USER_FIRSTPAGE'];
 
 				return $obj;
 			} catch (Exception $e) {
@@ -65,7 +79,19 @@
 
 				}
 
+				$_SESSION['new_themecolor'] = $data['themecolor'];
 
+				$sql = "UPDATE FGT_USER
+				        SET
+						USER_FIRSTPAGE = :USER_FIRSTPAGE,
+						USER_THEMECOLOR = :USER_THEMECOLOR
+						WHERE USER_ID = :USER_ID ";
+				$stmt = $db->prepare($sql);
+				$stmt->execute(array(
+						':USER_FIRSTPAGE' => $data['firstpage'],
+						':USER_THEMECOLOR' => $data['themecolor'],
+						':USER_ID' => $username
+					));
 
 				$obj = new stdClass;
 				$obj->success = true;

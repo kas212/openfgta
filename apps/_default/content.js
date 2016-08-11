@@ -22,12 +22,6 @@ var contentClass = function () {
 	};
 }
 
-
-
-
-
-
-
 function _btnNew_Click(ui) {
 	ui.Editor.new(function() {
 		ui.Editor.setValue(ui.Editor.obj_txt_CONTENTTYPE_ID, 'NEWS', 'News');
@@ -36,23 +30,30 @@ function _btnNew_Click(ui) {
 
 function _btnEdit_Click(ui) {
 	ui.btnEdit_Toggle();
+	$('#fb').filebox(ui.Editor.isEditMode?'disable':'enable');
 }
 
 function _btnSave_Click(ui) {
 	ui.Editor.endEdit();
 	ui.DataSave({
-		H: {
-			CONTENT_ID: ui.Editor.obj_txt_CONTENT_ID.textbox('getValue'),
-			CONTENT_PUBLISHDATE: ui.Editor.obj_dt_CONTENT_PUBLISHDATE.datebox('getValue'),
-			CONTENT_TITLE: ui.Editor.obj_txt_CONTENT_TITLE.textbox('getValue'),
-			CONTENT_TEXT: ui.Editor.obj_txt_CONTENT_TEXT.textbox('getValue'),
-			CONTENTTYPE_ID: ui.Editor.obj_txt_CONTENTTYPE_ID.textbox('getValue'),
-			__STATE: ui.Editor.getFormDataState(),
-		},
-		D: {
+			H: {
+				CONTENT_ID: ui.Editor.obj_txt_CONTENT_ID.textbox('getValue'),
+				CONTENT_PUBLISHDATE: ui.Editor.obj_dt_CONTENT_PUBLISHDATE.datebox('getValue'),
+				CONTENT_TITLE: ui.Editor.obj_txt_CONTENT_TITLE.textbox('getValue'),
+				CONTENT_TEXT: ui.Editor.obj_txt_CONTENT_TEXT.textbox('getValue'),
+				CONTENTTYPE_ID: ui.Editor.obj_txt_CONTENTTYPE_ID.textbox('getValue'),
+				CONTENT_FILE: ui.Editor.obj_txt_CONTENT_FILE.textbox('getValue'),
+				__STATE: ui.Editor.getFormDataState(),
+			},
+			D: {
 
+			}
+		},
+
+		function() {
+			//alert('test');
 		}
-	});
+	);
 }
 
 function _btnDelete_Click(ui) {
@@ -83,7 +84,7 @@ function _btnRowremove_Click(ui) {
 
 
 function _open_data(ui, id) {
-	ui.DataOpen({id, id},
+	ui.DataOpen({id: id},
 		function(data) {
 
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_ID, data.CONTENT_ID);
@@ -91,8 +92,7 @@ function _open_data(ui, id) {
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_TITLE, data.CONTENT_TITLE);
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_TEXT, data.CONTENT_TEXT);
 			ui.Editor.setValue(ui.Editor.obj_txt_CONTENTTYPE_ID, data.CONTENTTYPE_ID, data.CONTENTTYPE_NAME);
-
-
+			ui.Editor.setValue(ui.Editor.obj_txt_CONTENT_FILE, data.CONTENT_FILE);
 
 			ui.btnEdit.linkbutton('enable');
 		}

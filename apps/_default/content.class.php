@@ -1,5 +1,6 @@
 <?php
 
+
 	class content extends FGTA_Content
 	{
 
@@ -39,7 +40,7 @@
 				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TITLE', 'label'=>'Title',  'maxlength'=>'60', 'options'=>"required:true,missingMessage:'Title harus diisi'" ]),
 				new FGTA_Control_Textbox(['name'=>'obj_txt_CONTENT_TEXT', 'label'=>'text',  'maxlength'=>'65535', 'suppress'=>true, 'options'=>"" ]),
 				new FGTA_Control_Combobox(['name'=>'obj_txt_CONTENTTYPE_ID', 'label'=>'Type',  'options'=>"editable:false,valueField:'id',textField:'text',data:DATA['CONTENTTYPE']" ]),
-
+				new FGTA_Control_File(['name'=>'obj_txt_CONTENT_FILE', 'label'=>'File',  'options'=>"" ]),
 			);
 
 		}
@@ -105,7 +106,7 @@
 
 		public function OpenData_Header($id) {
 			$sql = "SELECT
-					CONTENT_ID, CONTENT_PUBLISHDATE, CONTENT_TITLE, CONTENT_TEXT, CONTENTTYPE_ID
+					CONTENT_ID, CONTENT_PUBLISHDATE, CONTENT_TITLE, CONTENT_TEXT, CONTENT_FILE, CONTENTTYPE_ID
 					,\"_CREATEBY\", \"_CREATEDATE\", \"_MODIFYBY\", \"_MODIFYDATE\", \"_ROWID\"
 			        FROM FGT_CONTENT WHERE CONTENT_ID = :CONTENT_ID ";
 			$stmt = $this->db->prepare($sql);
@@ -124,6 +125,7 @@
 			$obj->CONTENT_PUBLISHDATE = FGTA_SqlUtil::ToJSDate($row['CONTENT_PUBLISHDATE']);
 			$obj->CONTENT_TITLE = $row['CONTENT_TITLE'];
 			$obj->CONTENT_TEXT = $row['CONTENT_TEXT'];
+			$obj->CONTENT_FILE = $row['CONTENT_FILE'];
 			$obj->CONTENTTYPE_ID = $row['CONTENTTYPE_ID'];
 			$obj->CONTENTTYPE_NAME = array('ARTICLE'=>'Article','EVENT'=>'Event','NEWS'=>'News')[$obj->CONTENTTYPE_ID];
 
@@ -173,7 +175,7 @@
 			$obj = new stdClass;
 			$obj->CONTENT_PUBLISHDATE = FGTA_SqlUtil::ToSQLDate($H['CONTENT_PUBLISHDATE']);
 			$obj->CONTENT_TITLE = $H['CONTENT_TITLE'];
-			//$obj->CONTENT_TEXT = $H['CONTENT_TEXT'];
+			$obj->CONTENT_FILE = $H['CONTENT_FILE'];
 			$obj->CONTENTTYPE_ID = $H['CONTENTTYPE_ID'];
 
 

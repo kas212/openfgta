@@ -2,6 +2,7 @@
 
 	var ui;
     var WELCOMEPAGE = [{id:'_default/fgtatoday', text:'FGTA_Today'}];
+	var THEMECOLORS = [{id:'', text:'Default'},{id:'-blue', text:'Blue'},{id:'-green', text:'Green'},{id:'-gray', text:'Gray'},{id:'-orange', text:'Orange'},{id:'-red', text:'Red'}];
 
 	var PreferenceClass = function () {
 		$.extend(this, new FGTA_uiBase());
@@ -35,6 +36,7 @@
 		ui.obj_txt_PASS1 = $("#obj_txt_PASS1");
 		ui.obj_txt_PASS2 = $("#obj_txt_PASS2");
 		ui.obj_cbo_WELCOME = $("#obj_cbo_WELCOME");
+		ui.obj_cbo_THEMECOLOR = $("#obj_cbo_THEMECOLOR");
 		ui.obj_Profile = $("#obj_Profile");
 		ui.btnSave = $("#btnSave");
 
@@ -72,7 +74,8 @@
 
 					ui.obj_txt_USERNAME.textbox('setValue', username);
 					ui.obj_txt_FULLNAME.textbox('setValue', data.fullname);
-					ui.obj_cbo_WELCOME.combobox('setValue', '_default/fgtatoday');
+					ui.obj_cbo_WELCOME.combobox('setValue', data.firstpage);
+					ui.obj_cbo_THEMECOLOR.combobox('setValue', data.themecolor);
 
 					$("#image").prop("src", FGTA_ServiceUrl(ui.NS,ui.CL,'GetImage')+"&username=" + username);
 					$("#obj_Profile").val('');
@@ -103,7 +106,9 @@
 				username: ui.obj_txt_USERNAME.textbox('getValue'),
 				passold: ui.obj_txt_PASSOLD.textbox('getValue'),
 				pass1: ui.obj_txt_PASS1.textbox('getValue'),
-				pass2: ui.obj_txt_PASS2.textbox('getValue')
+				pass2: ui.obj_txt_PASS2.textbox('getValue'),
+				firstpage: ui.obj_cbo_WELCOME.combobox('getValue'),
+				themecolor: ui.obj_cbo_THEMECOLOR.combobox('getValue')
 			}},
 			success: function(result, status, xhr) {
 				try {
@@ -182,6 +187,8 @@
 	        new FGTA_Control_Textbox(['name'=>'obj_txt_PASS2', 'label'=>'Re-Enter', 'password'=>true, 'directrender'=>true, 'location'=>[190, 40, 200], 'options'=>"" ]);
 
 	        new FGTA_Control_Combobox(['name'=>'obj_cbo_WELCOME', 'label'=>'1stPage', 'directrender'=>true, 'location'=>[240, 40, 400], 'options'=>"editable:false,valueField:'id',textField:'text',data:WELCOMEPAGE " ]);
+			new FGTA_Control_Combobox(['name'=>'obj_cbo_THEMECOLOR', 'label'=>'Theme Color', 'directrender'=>true, 'location'=>[270, 40, 400], 'options'=>"editable:false,valueField:'id',textField:'text',data:THEMECOLORS " ]);
+
 	        ?>
 
 
@@ -196,7 +203,7 @@
 				<input id="obj_Profile" type="file">
 			</div>
 
-	        <div style="position:absolute; top:300px; left:40px; font-size: 8pt">
+	        <div style="position:absolute; top:340px; left:40px; font-size: 8pt">
 	            <a id="btnSave" class="easyui-linkbutton c2" href="javascript:Save()">Simpan Perubahan</a>
 	        </div>
 

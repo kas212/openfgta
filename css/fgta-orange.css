@@ -1,0 +1,29 @@
+#main_tabs .tabs-header { background: #de8033; }
+
+.bpanelheader { background: #de8033; border: 0px }
+.bpanelbody { background: #eee; }
+.fgta_field { position: absolute; height: 21px; border-bottom: 1px solid #dddddd }
+.fgta_label { width: 60px; float:left; font-size: 8pt; text-align: right; padding: 5px 10px 0px 0px }
+.messager-button .l-btn { background: #ccc; }
+.messager-window { background: #de8033; }
+.window { background-color: #ccc; }
+.layout-split-west { border-right: 5px solid #de8033; }
+.layout-expand-west { background: #de8033; }
+.tabs li a.tabs-inner { background: #eadfb2; }
+.l-btn-disabled, .l-btn-disabled:hover { opacity: 0.3; }
+.datagrid-header-row { background: #888; color: #fff; font-weight: bold; }
+.datagrid-row-over { cursor: pointer; }
+.datagrid-row-selected { background: #de8033; color: #FFFFFF }
+
+.datagrid-header { background: #aaa; border-left: 1px solid #d4a375}
+.panel-body { background: #f6f6f6 }
+.tabs li.tabs-selected a.tabs-inner { background: #f6f6f6; border-bottom: 1px solid #f6f6f6; }
+.datagrid-body { background: #ffffff; border-left: 1px solid #d4a375 }
+.datagrid-pager {  background: #eadfb2 none repeat scroll 0% 0% }
+.datagrid .datagrid-pager { border-top: 1px solid #d4a375; border-left: 1px solid #d4a375 }
+
+.edited-field { border: 1px dashed #0000FF }
+
+.fgta-icon-folder{
+    background:url('icon/folder.png') no-repeat center center;
+}

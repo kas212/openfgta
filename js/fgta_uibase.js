@@ -318,6 +318,9 @@
 						ui.Editor.acceptChanges();
 					}
 				}
+
+				if (this.fn_savesuccess!=undefined)
+					this.fn_savesuccess();
 			}
 			catch (err) {
 				ui.canvas.unmask();
@@ -553,7 +556,7 @@
 
 		}
 
-		this.DataSave = function(data) {
+		this.DataSave = function(data, fn_savesuccess) {
 			if (!ui.ValidateEditor(function(obj) {
 				$.messager.alert('Save Error','Cek pengisian Form.<br>Ada kesalahan pada <b>' + obj.labeltext + '</b>', 'warning', function() {
 					ui.setFocus(obj);
@@ -568,6 +571,7 @@
 				dataType: "json",
 				url: FGTA_ServiceUrl(ui.NS,ui.CL,'Save'),
 				data: data,
+				fn_savesuccess: fn_savesuccess,
 				success: ui.SaveSuccess,
 				error: ui.SaveError
 			});

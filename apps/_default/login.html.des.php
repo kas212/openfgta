@@ -39,7 +39,7 @@
 
 	<div id="maincontent" data-options="region:'center'" style="background-color: #000000">
 		<div style="margin:100px 0;"></div>
-		<div id ="loginbox" class="easyui-panel" title="Login to system" headerCls="bpanelheader" bodyCls="bpanelbody" data-options="style:{margin:'0 auto'}" style="width:400px; height:300px; padding:30px 70px 0px 70px;">
+		<div id ="loginbox" class="easyui-panel" title="Login to system" headerCls="bpanelheader" bodyCls="bpanelbody" data-options="style:{margin:'0 auto'}" style="width:400px; height:300px; padding:30px 70px 0px 70px; background: <?=$this->GetBgColor()?> ">
 			<div style="margin-bottom:10px">
 				<input id="obj_txt_username" class="easyui-textbox" style="width:100%;height:40px;padding:12px" data-options="prompt:'Username',iconCls:'icon-man',iconWidth:38">
 			</div>
@@ -51,7 +51,7 @@
 				<span><label for="obj_chk_remember">Remember Me</label></span>
 			</div>
 			<div style="padding-bottom: 10px; width:100%;">
-				<a class="easyui-linkbutton c6" style="padding:5px 0px;width:100%;" onclick="javascript: ui.doLogin()">
+				<a class="easyui-linkbutton <?=$this->GetButtonColor()?>" style="padding:5px 0px;width:100%;" onclick="javascript: ui.doLogin()">
 					<span style="font-size:14px;">Login</span>
 				</a><br>
 			</div>

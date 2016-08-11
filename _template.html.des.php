@@ -5,7 +5,7 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
     <title><?=$TITLE?></title>
-    <link rel="stylesheet" type="text/css" href="<?=__EASYUI_PATH?>/themes/metro/easyui.css">
+    <link rel="stylesheet" type="text/css" href="<?=__EASYUI_PATH?>/themes/metro<?=$this->THEME_COLOR?>/easyui.css">
     <link rel="stylesheet" type="text/css" href="<?=__EASYUI_PATH?>/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="<?=__EASYUI_PATH?>/themes/color.css">
 
@@ -73,34 +73,9 @@
 			visibility: hidden !important;
 		}
 
-        #main_tabs .tabs-header { background: #ccc; }
 
-        .bpanelheader { background: #ccc; }
-		.bpanelbody { background: #eee; }
-        .fgta_field { position: absolute; height: 21px; border-bottom: 1px solid #dddddd }
-        .fgta_label { width: 60px; float:left; font-size: 8pt; text-align: right; padding: 5px 10px 0px 0px }
-        .messager-button .l-btn { background: #ccc; }
-		.messager-window { background: #ccc; }
-        .window { background-color: #ccc; }
-		.layout-split-west { border-right: 5px solid #ccc; }
-		.layout-expand-west { background: #ccc; }
-		.tabs li a.tabs-inner { background: #eee; }
-		.l-btn-disabled, .l-btn-disabled:hover { opacity: 0.3; }
-        .datagrid-header-row { background: #888; color: #fff; font-weight: bold; }
-        .datagrid-row-over { cursor: pointer; }
-        .datagrid-row-selected { background: #338FFF; color: #FFFFFF }
-
-        .datagrid-header { background: #aaa; }
-        .panel-body { background: #f6f6f6 }
-        .tabs li.tabs-selected a.tabs-inner { background: #f6f6f6; border-bottom: 1px solid #f6f6f6; }
-        .datagrid-body { background: #ffffff }
-        .datagrid-pager {  background: rgb(221, 221, 221) none repeat scroll 0% 0% }
-
-        .edited-field { border: 1px dashed #0000FF }
-
-		.fgta-icon-folder{
-			background:url('icon/folder.png') no-repeat center center;
-		}
+        <?php require_once dirname(__FILE__)."/css/fgta".$this->THEME_COLOR.".css"; ?>
+		.panel-body-noheader { border-top-width: 0px; border-left-width: 0px; }
 
         <?php
         global $_GET;
@@ -264,6 +239,21 @@
     }
 
 
+	function getDataGridRowSelectedStyle() {
+		var tc = '<?=$this->THEME_COLOR?>';
+		switch (tc) {
+			case '-red':
+				return  'background: #F09090; color: #FFFFFF';
+			case '-green':
+				return  'background: #96a243; color: #FFFFFF';
+			case '-orange':
+				return  'background: #de8033; color: #FFFFFF';
+			case '-blue':
+				return  'background: #284463; color: #FFFFFF';
+			default:
+				return  'background: #338FFF; color: #FFFFFF';
+		}
+	}
 
     function changeCss(className, classValue) {
         // we need invisible container to store additional css definitions

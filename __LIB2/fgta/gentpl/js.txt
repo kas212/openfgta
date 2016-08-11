@@ -77,7 +77,7 @@ function _btnRowremove_Click(ui) {
 
 
 function _open_data(ui, id) {
-	ui.DataOpen({id, id},
+	ui.DataOpen({id: id},
 		function(data) {
 
 			{__OPENDATA_HEADER__}

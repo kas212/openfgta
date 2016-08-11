@@ -126,7 +126,7 @@
 
 
 		public function NewId($H) {
-			return "testid";
+			return uniqid();
 		}
 
 		public function Save($H, $D) {

@@ -91,50 +91,6 @@
 		}
 
 
-		public function GetButtonColor() {
-			switch ($this->THEME_COLOR) {
-				case "-red":
-					return "c5";
-
-				case "-green":
-					return "c1";
-
-				case "-orange":
-					return "c7";
-
-				case "-blue":
-					return "c6";
-
-				case "-gray":
-					return "c2";
-
-				default:
-					return "c6";
-
-			}
-		}
-
-		public function GetBgColor() {
-			switch ($this->THEME_COLOR) {
-				case "-red":
-					return "#F8c9c9";
-
-				case "-green":
-					return "#E0F892";
-
-				case "-orange":
-					return "#eadfb2";
-
-				case "-blue":
-					return "#91b8e3";
-
-				case "-gray":
-					return "#eee";
-
-				default:
-					return "#eee";
-			}
-		}
 
 
 	}

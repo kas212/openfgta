@@ -16,6 +16,7 @@
 .datagrid-row-selected { background: #284463; color: #FFFFFF }
 
 .datagrid-header { background: #aaa; border-left: 1px solid #6a88a9}
+.panel-header { background-color: #284463; border-color: #284463 }
 .panel-body { background: #f6f6f6; border-color: #6a88a9 }
 .panel-title { color: #fff }
 .tabs li.tabs-selected a.tabs-inner { background: #f6f6f6; border-bottom: 1px solid #f6f6f6; }

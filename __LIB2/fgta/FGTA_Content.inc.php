@@ -630,7 +630,6 @@ class FGTA_Content extends FGTA_WebService
 
 			default:
 				return "#ddd";
-
 		}
 	}
 
@@ -656,6 +655,8 @@ class FGTA_Content extends FGTA_WebService
 
 		}
 	}
+
+
 
 
 }

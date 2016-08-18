@@ -134,6 +134,24 @@ class FGTA_Request
 		self::$_ROOT_DIR = $ROOT_DIR;
 		self::$_DEFAULT_DIR = $ROOT_DIR . "/apps/$ns";
 
+		if (defined('__USER_APPS_DIR'))
+			if (is_dir($ROOT_DIR . "/apps/". __USER_APPS_DIR)) {
+				if (is_dir($ROOT_DIR . "/apps/". __USER_APPS_DIR . "/$ns")) {
+					$ns = __USER_APPS_DIR . "/$ns";
+					self::$_DEFAULT_DIR = $ROOT_DIR . "/apps/$ns";
+				}
+			}
+
+
+		self::$_REQUEST['app_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.class.php";
+		self::$_REQUEST['service_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.class.php";
+		if (defined('__SHOW_AS_MOBILE__')) {
+			self::$_REQUEST['tpl_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.html.mob.php";
+		} else {
+			self::$_REQUEST['tpl_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.html.des.php";
+		}
+
+
 
 		self::$_REQUEST['app_file'] =  self::$_ROOT_DIR . "/apps/$ns/$cl.class.php";
 		self::$_REQUEST['service_file'] =  self::$_ROOT_DIR . "/apps/$ns/$cl.class.php";
@@ -151,13 +169,6 @@ class FGTA_Request
 		}
 
 
-		self::$_REQUEST['app_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.class.php";
-		self::$_REQUEST['service_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.class.php";
-		if (defined('__SHOW_AS_MOBILE__')) {
-			self::$_REQUEST['tpl_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.html.mob.php";
-		} else {
-			self::$_REQUEST['tpl_file_login'] =  self::$_ROOT_DIR . "/apps/_default/login.html.des.php";
-		}
 
 
 

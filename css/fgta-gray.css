@@ -2,7 +2,7 @@
 
 .bpanelheader { background: #7a7d83; ; border: 0px}
 .bpanelbody { background: #eee; }
-.fgta_field { position: absolute; height: 21px; border-bottom: 1px solid #dddddd }
+.fgta_field { position: absolute; height: 21px; border-bottom: 1px solid #abafb8 }
 .fgta_label { width: 60px; float:left; font-size: 8pt; text-align: right; padding: 5px 10px 0px 0px }
 .messager-button .l-btn { background: #ccc; }
 .messager-window { background: #7a7d83; }

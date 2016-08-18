@@ -179,6 +179,7 @@ class FGTA_Main extends FGTA_Request
 
 
 			$objApp->THEME_COLOR = array_key_exists('themecolor', $_SESSION) ? $_SESSION['themecolor'] : '';
+			//$objApp->THEME_COLOR = "-blue";
 			$objApp->Render('_template.html.des.php', $dcon, $objApp);
 
 		}

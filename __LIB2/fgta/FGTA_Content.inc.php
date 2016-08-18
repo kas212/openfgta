@@ -339,7 +339,14 @@ class FGTA_Content extends FGTA_WebService
 
 	public function load_html_control($editor, $devform=false) 	{
 		$dat = array();
+
 		$LAYOUTFILE = $this->ROOT_DIR . "/apps" . "/" . $this->NS . "/" . $this->CL . ".layoutform.php";
+		if (defined('__USER_APPS_DIR'))
+			if (is_file($this->ROOT_DIR . "/apps/" __USER_APPS_DIR . "/" . $this->NS . "/" . $this->CL . ".layoutform.php"))
+				$LAYOUTFILE = $this->ROOT_DIR . "/apps/" __USER_APPS_DIR . "/" . $this->NS . "/" . $this->CL . ".layoutform.php"
+		
+
+
 		if (is_file($LAYOUTFILE)) {
 			require_once $LAYOUTFILE;
 		} else {

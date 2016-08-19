@@ -8,8 +8,10 @@
         function __construct($opt) {
             $this->process_opt($opt);
 
+			$param = array_key_exists('param', $opt) ? $opt['param'] : null;
+
             if ($this->directrender)
-                $this->GenerateHtml();
+                $this->GenerateHtml($param);
         }
 
         public function GenerateHtml($param)

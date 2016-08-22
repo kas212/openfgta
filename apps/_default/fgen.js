@@ -116,11 +116,35 @@ function _dgv_D5_RowDblClick(ui,index,row) {
 }
 
 
+function _TableBrowseTextboxSetReadonly(objtext) {
+	var background_readonly = getStyleRuleValue('background', '.fgta-textbox-text-readonly');
+	objtext.removeClass('fgta-textbox-text-readandwrite').removeClass('fgta-textbox-text-readonly').addClass('fgta-textbox-text-readonly');
+	objtext.css('background', background_readonly);
+	objtext.attr("disabled", true);
+}
 
+function _InitTableBrowseTextbox() {
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_PK.parent().children()[2]).find(":text")[0]));
+
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_TABLE.parent().children()[2]).find(":text")[0]));
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_D1TABLE.parent().children()[2]).find(":text")[0]));
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_D2TABLE.parent().children()[2]).find(":text")[0]));
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_D3TABLE.parent().children()[2]).find(":text")[0]));
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_D4TABLE.parent().children()[2]).find(":text")[0]));
+	_TableBrowseTextboxSetReadonly($($(ui.Editor.obj_txt_FGEN_D5TABLE.parent().children()[2]).find(":text")[0]));
+}
 
 function _btnNew_Click(ui) {
-	ui.Editor.new();
+	ui.Editor.new(function() {
+	});
 	$('#btnGenerate').linkbutton('disable');
+	$('#btn_H_Get').linkbutton('enable');
+	$('#btn_D1_Get').linkbutton('enable');
+	$('#btn_D2_Get').linkbutton('enable');
+	$('#btn_D3_Get').linkbutton('enable');
+	$('#btn_D4_Get').linkbutton('enable');
+	$('#btn_D5_Get').linkbutton('enable');
+	_InitTableBrowseTextbox();
 }
 
 function _btnEdit_Click(ui) {
@@ -143,6 +167,7 @@ function _btnEdit_Click(ui) {
 		$('#btn_D5_Get').linkbutton('disable');
 	}
 
+	_InitTableBrowseTextbox();
 }
 
 function _btnSave_Click(ui) {
@@ -171,11 +196,11 @@ function _btnSave_Click(ui) {
 		},
 		D: {
 			H: ui.dgv_H.datagrid('getChanges'),
-				D1: ui.dgv_D1.datagrid('getChanges'),
-				D2: ui.dgv_D2.datagrid('getChanges'),
-				D3: ui.dgv_D3.datagrid('getChanges'),
-				D4: ui.dgv_D4.datagrid('getChanges'),
-				D5: ui.dgv_D5.datagrid('getChanges')
+			D1: ui.dgv_D1.datagrid('getChanges'),
+			D2: ui.dgv_D2.datagrid('getChanges'),
+			D3: ui.dgv_D3.datagrid('getChanges'),
+			D4: ui.dgv_D4.datagrid('getChanges'),
+			D5: ui.dgv_D5.datagrid('getChanges')
 		}
 	});
 }
@@ -321,22 +346,22 @@ function _open_data(ui, id) {
 			ui.Editor.setValue(ui.Editor.obj_txt_FGEN_D5TABLE, data.FGEN_D5TABLE);
 
 			ui.dgv_H.datagrid('loadData', data.DETIL.H.records);
-				ui.dgv_H.maxline = data.DETIL.H.maxline;
+			ui.dgv_H.maxline = data.DETIL.H.maxline;
 
-				ui.dgv_D1.datagrid('loadData', data.DETIL.D1.records);
-				ui.dgv_D1.maxline = data.DETIL.D1.maxline;
+			ui.dgv_D1.datagrid('loadData', data.DETIL.D1.records);
+			ui.dgv_D1.maxline = data.DETIL.D1.maxline;
 
-				ui.dgv_D2.datagrid('loadData', data.DETIL.D2.records);
-				ui.dgv_D2.maxline = data.DETIL.D2.maxline;
+			ui.dgv_D2.datagrid('loadData', data.DETIL.D2.records);
+			ui.dgv_D2.maxline = data.DETIL.D2.maxline;
 
-				ui.dgv_D3.datagrid('loadData', data.DETIL.D3.records);
-				ui.dgv_D3.maxline = data.DETIL.D3.maxline;
+			ui.dgv_D3.datagrid('loadData', data.DETIL.D3.records);
+			ui.dgv_D3.maxline = data.DETIL.D3.maxline;
 
-				ui.dgv_D4.datagrid('loadData', data.DETIL.D4.records);
-				ui.dgv_D4.maxline = data.DETIL.D4.maxline;
+			ui.dgv_D4.datagrid('loadData', data.DETIL.D4.records);
+			ui.dgv_D4.maxline = data.DETIL.D4.maxline;
 
-				ui.dgv_D5.datagrid('loadData', data.DETIL.D5.records);
-				ui.dgv_D5.maxline = data.DETIL.D5.maxline;
+			ui.dgv_D5.datagrid('loadData', data.DETIL.D5.records);
+			ui.dgv_D5.maxline = data.DETIL.D5.maxline;
 
 
 			$('#btn_H_Get').linkbutton('disable');
@@ -346,18 +371,18 @@ function _open_data(ui, id) {
 			$('#btn_D4_Get').linkbutton('disable');
 			$('#btn_D5_Get').linkbutton('disable');
 
+			_InitTableBrowseTextbox();
+
 			ui.btnEdit.linkbutton('enable');
 		}
 	);
 }
 
 
-function _load_table_field(tabname, tablename, dgv, pk) {
-	if (!ui.Editor.isEditMode())
-		return;
 
-	if (tablename=='')
-		return;
+
+function _load_table_field(tabname, tablename, dgv, pk, fn_fieldloaded) {
+
 
 	ui.tabMainDetil.tabs('select', tabname);
 	ui.canvas.mask('Loading table field of ' + tablename);
@@ -401,10 +426,10 @@ function _load_table_field(tabname, tablename, dgv, pk) {
 					}
 				}
 				ui.endEditing(dgv);
-
-
-
 				ui.canvas.unmask();
+
+
+				fn_fieldloaded();
 			}
 			catch (err) {
 				ui.canvas.unmask();
@@ -418,11 +443,6 @@ function _load_table_field(tabname, tablename, dgv, pk) {
 	});
 }
 
-
-
-function _btn_H_Get_Click() {
-	alert('tes');
-}
 
 
 
@@ -439,19 +459,11 @@ function _Generate() {
 		if (ui.Editor.obj_txt_FGEN_PK.textbox('getValue')=='')
 			throw 'PK Table Header belum diisi';
 
-
-
 	}
 	catch (err) {
 		$.messager.alert("Generate", err, "error").window({ shadow: false });
 		return;
 	}
-
-
-
-
-
-
 
 	ui.canvas.mask('Generating Program Skeleton... ');
 
@@ -483,5 +495,53 @@ function _Generate() {
 			ui.ProcessErrorText("Webservice Generate on _Generate() Error", xhr, status, error);
 		},
 	});
+
+}
+
+
+function OpenTable_Dialog(tabname, dgv) {
+	var rows = dgv.datagrid('getData').rows;
+	if (rows.length>0) {
+		$.messager.alert(tabname, "Table di '"+ tabname +"' tidak dalam keadaan kosong!", "error", function() {
+			ui.tabMainDetil.tabs('select', tabname);
+		}).window({ shadow: false });
+	} else {
+		ui.list_TABLE_dlg.tabname = tabname;
+		ui.list_TABLE_dlg.dgv = dgv;
+		ui.list_TABLE_dlg.fn_load_table_field = _load_table_field;
+		ui.list_TABLE_dlg.dialog({closed: false});
+		$('#list_TABLE_dlg_srcGridResult').datagrid('loadData', []);
+		$('#list_TABLE_dlg_srcTextbox').textbox('setValue', '');
+		$('#list_TABLE_dlg_srcTextbox').textbox('textbox').focus();
+	}
+}
+
+function OpenTable(PK, tabname, obj_textbox, obj_dgv) {
+	if (!ui.Editor.isEditMode())
+		return;
+
+
+	var name = $('#obj_txt_FGEN_' + tabname + 'NAME').textbox('getValue');
+	var h_table = $('#obj_txt_FGEN_TABLE').textbox('getValue');
+
+	if (h_table.trim()=='') {
+		$.messager.alert('Table Master', "Table Master belum diisi", "error", function() {
+			$('#obj_txt_FGEN_TABLE').textbox('textbox').focus();
+		}).window({ shadow: false });
+	}
+	else if (PK.trim()=='') {
+		$.messager.alert('Primary Key', "Primary Key Table Master belum diisi", "error", function() {
+			$('#obj_txt_FGEN_PK').textbox('textbox').focus();
+		}).window({ shadow: false });
+	}
+	else if (name.trim()=='') {
+			$.messager.alert(tabname + " Name", tabname + " Name belum diisi", "error", function() {
+				$('#obj_txt_FGEN_' + tabname + 'NAME').textbox('textbox').focus();
+			}).window({ shadow: false });
+	}
+	else {
+		//_load_table_field(tabname, obj_textbox.textbox('getValue'), obj_dgv, PK);
+		OpenTable_Dialog(tabname, obj_dgv);
+	}
 
 }

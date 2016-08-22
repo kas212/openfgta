@@ -29,6 +29,8 @@
 				$_SESSION['islogin'] = true;
 				$_SESSION['username'] = $username;
 				$_SESSION['userfullname'] = $username;
+				$_SESSION['firstpage'] = 'fgtadoday';
+				$_SESSION['themecolor'] = '-gray';
 
 				$objUser = new stdClass;
 				$objUser->username = $username;

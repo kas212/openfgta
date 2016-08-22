@@ -35,24 +35,24 @@
 
 
 			$this->Editor = array(
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_ID', 'label'=>'ID',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_NAME', 'label'=>'ProgName',  'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_ID', 'label'=>'ID',  'maxlength'=>'30', 'options'=>"required:true,validType:['FGTA_ID','length[3,30]'],missingMessage:'ID harus diisi'" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_NAME', 'label'=>'ProgName',  'maxlength'=>'90', 'options'=>"required:true,missingMessage:'Nama Program harus diisi'" ]),
 				new FGTA_Control_Combobox(['name'=>'obj_cbo_FGEN_PROGTYPE', 'label'=>'Type',  'options'=>"validType:'FGTA_CBO[ui.Editor.obj_cbo_FGEN_PROGTYPE]',editable:false,valueField:'id',textField:'text',data:DATA['TYPE']" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_FOLDER', 'label'=>'Folder',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_IDENT', 'label'=>'Ident', 'labelwidth'=> 35 , 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_TABLE', 'label'=>'Table', 'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_H_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_FOLDER', 'label'=>'Folder', 'maxlength'=>'90', 'options'=>"required:true,missingMessage:'Nama Folder harus diisi'" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_IDENT', 'label'=>'Ident', 'maxlength'=>'90','labelwidth'=> 35 , 'options'=>"required:true,missingMessage:'Nama Identitas Program harus diisi'" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_TABLE', 'label'=>'Table', 'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_H_Get', 'options'=>"" ]),
 				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_PK', 'label'=>'PK',  'options'=>"" ]),
 				new FGTA_Control_Checkbox(['name'=>'obj_chk_FGEN_ISAUTO', 'label'=>'AutoID' ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D1NAME', 'label'=>'D.1.Name',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D1TABLE', 'label'=>'D.1.Tbl',  'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_D1_Get', 'button_onclick'=>'_btn_H_Get_Click', 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D2NAME', 'label'=>'D.2.Name',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D2TABLE', 'label'=>'D.2.Tbl',  'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_D2_Get', 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D3NAME', 'label'=>'D.3.Name',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D3TABLE', 'label'=>'D.3.Tbl',  'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_D3_Get', 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D4NAME', 'label'=>'D.4.Name',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D4TABLE', 'label'=>'D.4.Tbl',  'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_D4_Get', 'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D5NAME', 'label'=>'D.5.Name',  'options'=>"" ]),
-				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D5TABLE', 'label'=>'D.5.Tbl',  'buttonlabel'=>'...', 'buttonwidth'=>'30', 'button'=>'btn_D5_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D1NAME', 'label'=>'D.1.Name',  'maxlength'=>'90','options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D1TABLE', 'label'=>'D.1.Tbl',  'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_D1_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D2NAME', 'label'=>'D.2.Name',  'maxlength'=>'90','options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D2TABLE', 'label'=>'D.2.Tbl',  'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_D2_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D3NAME', 'label'=>'D.3.Name',  'maxlength'=>'90','options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D3TABLE', 'label'=>'D.3.Tbl',  'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_D3_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D4NAME', 'label'=>'D.4.Name',  'maxlength'=>'90','options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D4TABLE', 'label'=>'D.4.Tbl',  'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_D4_Get', 'options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D5NAME', 'label'=>'D.5.Name',  'maxlength'=>'90','options'=>"" ]),
+				new FGTA_Control_Textbox(['name'=>'obj_txt_FGEN_D5TABLE', 'label'=>'D.5.Tbl',  'buttonlabel'=>'Field', 'buttonwidth'=>'40', 'button'=>'btn_D5_Get', 'options'=>"" ]),
 
 				new FGTA_Control_Datagrid(['name'=>'dgv_H', 'label'=>'H',
 					'columnid'=>'group_id',
@@ -64,7 +64,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['CONTROL']}}"],
 						['label'=>'List', 'mapping'=>'FGEND_ISLIST', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Search', 'mapping'=>'FGEND_ISSEARCH', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Form', 'mapping'=>'FGEND_ISFORM', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
@@ -157,7 +157,7 @@
 
 			switch($dataid) {
 				case 'CONTROL' :
-					$ctrls = ['textbox', 'combobox', 'datebox', 'numberbox'];
+					$ctrls = ['textbox', 'combobox', 'datebox', 'numberbox', 'checkbox'];
 					$data = array();
 					$i=0;
 					foreach ($ctrls as $ctrl) {
@@ -630,7 +630,6 @@
 			}
 		}
 
-
 		public function LoadTableField($tablename) {
 
 			try {
@@ -678,7 +677,6 @@
 				throw new Exception('Error in LoadTableField.\r\n' . $e->getMessage());
 			}
 		}
-
 
 		public function Generate($id) {
 			require_once "fgta/FGTA_Generator.inc.php";
@@ -826,6 +824,69 @@
 			}
 		}
 
+
+		function ListTable($pageNumber, $pageSize, $param) {
+			$CONDS = FGTA_SqlUtil::GetWhereCondition(array(
+				":SEARCH" => ["TABLE_NAME LIKE  '%%' || UPPER(%s) || '%%'"]
+			), $param);
+
+			$WHERE_STMT     = $CONDS["SQL"];
+			$SQL_PARAMVALUE = $CONDS["VALUE"];
+
+
+			$sql = "
+				select
+				TABLE_NAME as TABLE_ID,
+				TABLE_NAME
+				from (
+				    select UPPER(rdb\$relation_name) as TABLE_NAME
+				    from rdb\$relations
+				    where rdb\$view_blr is null
+				    and (rdb\$system_flag is null or rdb\$system_flag = 0)
+				)
+				$WHERE_STMT
+			";
+
+
+			$stmt_key = $this->db->prepare("
+				select
+				    s.rdb\$field_name AS PK
+				from
+				    rdb\$indices i
+				left join rdb\$index_segments s on i.rdb\$index_name = s.rdb\$index_name
+				left join rdb\$relation_constraints rc on rc.rdb\$index_name = i.rdb\$index_name
+				where
+				    rc.rdb\$constraint_type = 'PRIMARY KEY'
+					and s.rdb\$field_name <> '_LINE'
+				    and rc.rdb\$relation_name = :TABLE_NAME
+			");
+
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->execute($SQL_PARAMVALUE);
+			$rows  = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$records = array();
+			foreach ($rows as $row)
+			{
+				$stmt_key->execute(array(
+					':TABLE_NAME' => $row['TABLE_NAME']
+				));
+				$key = $stmt_key->fetch(PDO::FETCH_ASSOC);
+				$key = array_key_exists('PK', $key) ? $key['PK'] : '';
+
+				$records[] = array(
+						'TABLE_ID' => trim($row['TABLE_ID']),
+						'TABLE_NAME' => trim($row['TABLE_NAME']),
+						'PRIMARY_KEY' => trim($key)
+				);
+			}
+
+			$obj = new stdClass;
+			$obj->records = $records;
+
+			return $obj;
+		}
 
 
 	}

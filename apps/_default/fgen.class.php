@@ -82,7 +82,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['GRIDEDITOR']}}"]
 					]
 				]),
 
@@ -97,7 +97,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['GRIDEDITOR']}}"]
 					]
 				]),
 
@@ -112,7 +112,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['GRIDEDITOR']}}"]
 					]
 				]),
 
@@ -127,7 +127,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['GRIDEDITOR']}}"]
 					]
 				]),
 
@@ -142,7 +142,7 @@
 					'columns' => [
 						['label'=>'Field', 'mapping'=>'FGEND_FIELD', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
 						['label'=>'Label', 'mapping'=>'FGEND_LABEL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"],
-						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'textbox', options:{readonly: false}}"]
+						['label'=>'Control', 'mapping'=>'FGEND_CONTROL', 'options'=>"width:100, editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text', data:DATA['GRIDEDITOR']}}"]
 					]
 				]),
 
@@ -150,7 +150,6 @@
 			);
 
 		}
-
 
 		public function LoadPage_PreloadData($dataid) {
 			$F = null;
@@ -166,10 +165,20 @@
 						echo ($i<count($ctrls)) ? "," : "";
 					}
 					return;
+
+				case 'GRIDEDITOR' :
+					$ctrls = ['textbox', 'combobox', 'numberbox'];
+					$data = array();
+					$i=0;
+					foreach ($ctrls as $ctrl) {
+						$i++;
+						echo "{\"id\":\"".$ctrl."\",\"text\":\"".$ctrl."\"}";
+						echo ($i<count($ctrls)) ? "," : "";
+					}
+					return;
 			}
 
 		}
-
 
 		public function ListData($pageNumber, $pageSize, $param) {
 
@@ -216,7 +225,6 @@
 
 			return $obj;
 		}
-
 
 		public function OpenData($id) {
 			$obj = $this->OpenData_Header($id);
@@ -280,8 +288,6 @@
 			return $obj;
 		}
 
-
-
 		public function OpenData_DetilH($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, FGEND_ISLIST, FGEND_ISSEARCH, FGEND_ISFORM, \"_LINE\"
 			        FROM FGT_FGEND
@@ -313,7 +319,6 @@
 
 		}
 
-
 		public function OpenData_DetilD1($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, \"_LINE\"
 			        FROM FGT_FGEND
@@ -341,7 +346,6 @@
 			return ['records'=>$records, 'maxline'=>$line];
 
 		}
-
 
 		public function OpenData_DetilD2($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, \"_LINE\"
@@ -371,7 +375,6 @@
 
 		}
 
-
 		public function OpenData_DetilD3($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, \"_LINE\"
 			        FROM FGT_FGEND
@@ -399,7 +402,6 @@
 			return ['records'=>$records, 'maxline'=>$line];
 
 		}
-
 
 		public function OpenData_DetilD4($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, \"_LINE\"
@@ -429,7 +431,6 @@
 
 		}
 
-
 		public function OpenData_DetilD5($id) {
 			$sql = "SELECT FGEND_FIELD, FGEND_LABEL, FGEND_CONTROL, \"_LINE\"
 			        FROM FGT_FGEND
@@ -457,9 +458,6 @@
 			return ['records'=>$records, 'maxline'=>$line];
 
 		}
-
-
-
 
 		public function NewId($H) {
 			return "testid";
@@ -543,7 +541,6 @@
 			return $id;
 		}
 
-
 		public function Save_Detil($id, $d, $tab) {
 			$TABLE = "FGT_FGEND";
 			if (is_array($d))
@@ -593,7 +590,6 @@
 
 		}
 
-
 		public function Delete($id) {
 			$db = $this->db;
 			$db->setAttribute(PDO::ATTR_AUTOCOMMIT,0);
@@ -618,7 +614,6 @@
 				throw new Exception('Error in Deleting Data.\r\n' . $e->getMessage());
 			}
 		}
-
 
 		public function GetLabelName($field, $entity) {
 			if (substr($field, 0, strlen($entity)+1) == $entity . '_' ) {
@@ -823,7 +818,6 @@
 				return $obj;
 			}
 		}
-
 
 		function ListTable($pageNumber, $pageSize, $param) {
 			$CONDS = FGTA_SqlUtil::GetWhereCondition(array(

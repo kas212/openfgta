@@ -100,15 +100,24 @@
             foreach ($this->columns as $co) {
                 $label = $co['label'];
                 $mapping = $co['mapping'];
+				$mapping_source = $mapping; // kolom di dialog
+				$mapping_target = $mapping; // kolom di datagrid
+
+				$mapping_translation = explode(":", $mapping);
+				if (count($mapping_translation)>1) {
+					$mapping_source = $mapping_translation[0];
+					$mapping_target = $mapping_translation[1];
+				}
+
                 $width = array_key_exists('width', $co) ? $co['width'] : 100;
                 if (array_key_exists('return', $co)) {
                     $return = $co['return'];
-                    $re .= "$mapping: $return, \r\n";
+                    $re .= "$mapping_source: $return, \r\n";
                     if ($this->startsWith($return, "row.")) {
-                        $th .= $this->CreateColumn($label, $mapping, $width);
+                        $th .= $this->CreateColumn($label, $mapping_target, $width);
                     }
                 } else {
-                    $th .= $this->CreateColumn($label, $mapping, $width);
+                    $th .= $this->CreateColumn($label, $mapping_target, $width);
                 }
             }
 

@@ -16,6 +16,9 @@
 
     class FGTA_Generator
     {
+		public $HAS_NUMBER_EDITOR = false;
+
+
         public $OBJPREFIX = array(
             'textbox' => 'obj_txt_',
             'numberbox' => 'obj_txt_',
@@ -95,6 +98,7 @@
             $tpl = str_replace('{__SAVE_HEADER__}', $this->Gen_Class_SaveHeader(), $tpl);
             $tpl = str_replace('{__SAVE_DETIL_FN__}', $this->Gen_Class_SaveDetilFn(), $tpl);
             $tpl = str_replace('{__DELETE_TABLE_LIST__}', $this->Gen_Class_DeleteTable(), $tpl);
+			$tpl = str_replace('{__JSMODULE_LOADER__}', $this->Gen_Class_JsModuleLoader(), $tpl);
 
 
 
@@ -223,7 +227,7 @@
             $tpl['checkbox'] = "new FGTA_Control_Checkbox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}' ]),";
             $tpl['combobox'] = "new FGTA_Control_Combobox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}', 'options'=>\"editable:false,valueField:'id',textField:'text',data:DATA['{__NAME__}']\" ]),";
             $tpl['comboboxremote'] = "new FGTA_Control_Combobox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}', 'options'=>\"mode:'remote',valueField:'id',textField:'text',data:DATA['{__NAME__}'],loader:{__LOADER_NAME__}\" ]),";
-            $tpl['numberbox']  = "new FGTA_Control_Numberbox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}',  'options'=>\"\" ]),";
+            $tpl['numberbox']  = "new FGTA_Control_Numberbox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}',  'options'=>\"align:'right', formatter:function(value, row){ return accounting.formatMoney(value, '', 0); }\" ]),";
             $tpl['datebox']  = "new FGTA_Control_Datebox(['name'=>'{__OBJNAME__}', 'label'=>'{__LABEL__}',  'options'=>\"\" ]),";
 
 
@@ -244,6 +248,11 @@
                 $control =  $dat['control'];
                 $objname = $this->OBJPREFIX[$control] . $fieldname ;
                 $loadername = $objname . "_Loader";
+
+
+				if ($control=='numberbox')
+					$this->HAS_NUMBER_EDITOR = true;
+
 
                 $fndetil = str_replace('{__LABEL__}', $label, $tpl[$control]);
                 $fndetil = str_replace('{__OBJNAME__}', $objname, $fndetil);
@@ -282,14 +291,30 @@
                 $label = $dat['LABEL'];
                 $FIELDS = $dat['FIELDS'];
 
-                $tpl_detil = "['label'=>'{__LABEL__}', 'mapping'=>'{__MAPPING__}', 'options'=>\"width:100, editor:{type:'textbox', options:{readonly: false}}\"]";
+                $tpl_detil = "['label'=>'{__LABEL__}', 'mapping'=>'{__MAPPING__}', 'options'=>\"width:100, {__EDITOR__}\"]";
                 $fn_column = "";
                 $i = 0;
                 $n = count($FIELDS) - 1;
                 while (list($detid, $detdat) = each($FIELDS)) {
                     $labeldetil =  $detdat['label'];
+					$controldetil = $detdat['control'];
+
+					$editor = "";
+					switch ($controldetil) {
+						case 'numberbox' :
+							$editor = "align:'right', editor:{type:'numberbox', options:{readonly: false, groupSeparator:','}}, formatter:function(value, row){ return accounting.formatMoney(value, '', 0); }";
+							$this->HAS_NUMBER_EDITOR = true;
+							break;
+						case 'combobox' :
+							$editor = "editor:{type:'combobox', options:{readonly:false, editable:false, valueField:'id', textField:'text'}}";
+							break;
+						default:
+							$editor = "editor:{type:'textbox', options:{readonly: false}}";
+					}
+
                     $fn_column_detil = str_replace('{__LABEL__}', $labeldetil, $tpl_detil);
                     $fn_column_detil = str_replace('{__MAPPING__}', $detid, $fn_column_detil);
+					$fn_column_detil = str_replace('{__EDITOR__}', $editor, $fn_column_detil);
                     $fn_column .= ($i>0 ? "\t\t\t\t\t":""). "$fn_column_detil";
                     $fn_column .= ($i<$n) ? ",\r\n":"";
                     $i++;
@@ -595,14 +620,24 @@
                 $FIELDS = $dat['FIELDS'];
                 $TABLE = $dat['TABLE'];
 
+
                 $cols = array();
-                $tpl_detil = "\$obj->{__MAPPING__} = \$row['{__MAPPING__}'];";
+                $tpl_detil = "\$obj->{__MAPPING__} = {__CAST__}\$row['{__MAPPING__}'];";
                 $fn_column = "";
                 $i = 0;
                 $n = count($FIELDS) - 1;
                 while (list($detid, $detdat) = each($FIELDS)) {
                     $cols[] = $detid;
+					$control = $detdat['control'];
+
+					if ($control=='numberbox')
+						$cast = "(float)";
+					else
+						$cast = "";
+
+
                     $fn_column_detil = str_replace('{__MAPPING__}', $detid, $tpl_detil);
+					$fn_column_detil = str_replace('{__CAST__}', $cast, $fn_column_detil);
                     $fn_column .= ($i>0 ? "\t\t\t\t":""). "$fn_column_detil";
                     $fn_column .= ($i<$n) ? "\r\n":"";
                     $i++;
@@ -634,6 +669,16 @@
 
             return implode(",", $TABLES);
         }
+
+		public function Gen_Class_JsModuleLoader() {
+			$jsmodules = "";
+			if ($this->HAS_NUMBER_EDITOR) {
+				$jsmodules .= "\$this->Scripts->load(\"accounting.min.js\", \"js\");\r\n";
+			}
+
+			return $jsmodules;
+		}
+
 
         public function Gen_JS() {
             $fp = fopen(__TPL_JS, "r");

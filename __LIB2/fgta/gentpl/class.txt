@@ -15,6 +15,7 @@
 			global $_GET;
 
 			$this->Scripts->load("{__PHPCLASSNAME__}.js");
+			{__JSMODULE_LOADER__}
 
 			$this->dgvList = new FGTA_Control_Datagrid([
 				'name' => 'dgvList',

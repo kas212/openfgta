@@ -161,6 +161,9 @@ class FGTA_SqlUtil
 		$SQL_PARAM = array();
 		$SQL_PARAMVALUE = array();
 
+
+
+
 		if (is_array($param)) {
 			foreach ($param as $p) {
 				if ($p['Checked']=='false') continue;
@@ -169,9 +172,11 @@ class FGTA_SqlUtil
 				$value = $p['Value'];
 
 				if (!is_array($CONDDATA[$name])) {
+					if (trim($CONDDATA[$name])=="") continue;
 					$SQL_PARAM[] = "(" . sprintf($CONDDATA[$name], $name) . ")";
 					$SQL_PARAMVALUE[$name] = $value;
 				}  else {
+					if (count($CONDDATA[$name])==0) continue;
 					$i = 1;
 					$SQL_PARAM_INNER = array();
 					foreach ($CONDDATA[$name] as $cond) {
@@ -185,7 +190,12 @@ class FGTA_SqlUtil
 			}
 		}
 
+
+
 		$WHERE_STMT =  (count($SQL_PARAM) > 0) ? " WHERE " . implode(" AND ", $SQL_PARAM) : "";
+
+
+		//echo $WHERE_STMT;
 
 		return [
 			"SQL" => $WHERE_STMT,

@@ -2,6 +2,7 @@
     var ui;
     var DATA = {
         'CONTROL': [<?php $this->LoadPage_PreloadData('CONTROL'); ?>],
+        'GRIDEDITOR': [<?php $this->LoadPage_PreloadData('GRIDEDITOR'); ?>],
         'TYPE' : [{id:'0', text:'--PILIH--'},{id:'MST', text:'MASTER'},{id:'TRN', text:'TRANSAKSI'},{id:'RPT', text:'REPORT'}]
     };
 
@@ -120,9 +121,12 @@
                 <div class="easyui-layout" data-options="fit:true">
                     <!-- FORM -->
                     <div data-options="region:'north'" border="false" style="height:180px;">
-                    <form id="formMain">
-                    <?php $this->load_html_control($this->Editor); ?>
-                    </form>
+	                    <form id="formMain">
+	                    <?php $this->load_html_control($this->Editor); ?>
+	                    </form>
+						<div id="obj_test" class="fgta_field" style="top:150px; left:460px; width:200px; border: 0px ">
+							Open Program
+						</div>
                     </div>
 
                     <!-- TAB DETAIL -->

@@ -145,6 +145,8 @@ function _btnNew_Click(ui) {
 	$('#btn_D4_Get').linkbutton('enable');
 	$('#btn_D5_Get').linkbutton('enable');
 	_InitTableBrowseTextbox();
+
+	$('#obj_test').html('');
 }
 
 function _btnEdit_Click(ui) {
@@ -321,7 +323,6 @@ function _btnRowremove_Click(ui) {
 	}
 }
 
-
 function _open_data(ui, id) {
 	ui.DataOpen({id, id},
 		function(data) {
@@ -373,13 +374,13 @@ function _open_data(ui, id) {
 
 			_InitTableBrowseTextbox();
 
+			ShowTestLink();
+
+
 			ui.btnEdit.linkbutton('enable');
 		}
 	);
 }
-
-
-
 
 function _load_table_field(tabname, tablename, dgv, pk, fn_fieldloaded) {
 
@@ -443,9 +444,6 @@ function _load_table_field(tabname, tablename, dgv, pk, fn_fieldloaded) {
 	});
 }
 
-
-
-
 function _Generate() {
 
 	try
@@ -483,6 +481,7 @@ function _Generate() {
 					$.messager.alert("Generator", "Done.", "info").window({ shadow: false });
 				}
 
+				ShowTestLink();
 				ui.canvas.unmask();
 			}
 			catch (err) {
@@ -497,7 +496,6 @@ function _Generate() {
 	});
 
 }
-
 
 function OpenTable_Dialog(tabname, dgv) {
 	var rows = dgv.datagrid('getData').rows;
@@ -544,4 +542,11 @@ function OpenTable(PK, tabname, obj_textbox, obj_dgv) {
 		OpenTable_Dialog(tabname, obj_dgv);
 	}
 
+}
+
+function ShowTestLink() {
+	var ns = ui.Editor.obj_txt_FGEN_FOLDER.textbox('getValue');
+	var cl = ui.Editor.obj_txt_FGEN_IDENT.textbox('getValue');
+	var link = '<a href="http://localhost/openfgta/container.des.php?mode=app&ns=' + ns + '&cl='+ cl +'" target="newtab">Test</a>'
+	$('#obj_test').html(link);
 }
